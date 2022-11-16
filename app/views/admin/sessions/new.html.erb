@@ -1,6 +1,7 @@
 <h2>管理者ログイン</h2>
 
-<%= form_with model: @user, url: session_path do |f| %>
+<%= form_with model: @admin, url: session_path(resource_name) do |f| %>
+
   <div class="field">
     <%= f.label "メールアドレス" %><br>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -21,6 +22,7 @@
   <div class="actions">
     <%= f.submit "ログイン" %>
   </div>
+
 <% end %>
 
 <%= render "admin/shared/links" %>
