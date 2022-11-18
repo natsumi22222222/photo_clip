@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
    scope module: :public do
     post '/homes/guest_sign_in', to: 'homes#new_guest'
-    resources :homes, only:[:top]
+    root to: 'homes#top'
     get 'about' => 'homes#about'
     resources :tags, only: [:create, :destroy, :edit, :update]
     resources :genres, only:[:index, :show]

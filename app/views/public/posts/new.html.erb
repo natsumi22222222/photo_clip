@@ -1,0 +1,16 @@
+<h3>写真投稿ページ</h3>
+<%= form_with model: @post, url: do |f| %>
+
+  <%= f.file_field :image, accept: "image/*" %>
+  <%= f.label "タイトル" %>
+  <%= f.text_field :title %>
+  <%= f.label "説明文" %>
+  <%= f.text_field :body %>
+  <%= f.label "地図情報" %>
+
+  <%= f.label "タグ登録" %>
+  <%= f.text_field : %>
+  <%= f.label "ジャンル" %>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name %>
+
+<% end %>
