@@ -10,23 +10,29 @@
 </style>
 
 <script>
-    let map
+let map
 
-    const display = document.getElementById('display')
+ const display = document.getElementById('display')
 
+function initMap(){
 
-    function initMap() {
-        geocoder = new google.maps.Geocoder()
+　// 位置情報を取得する
+  navigator.geolocation.getCurrentPosition(function (position) {
+    LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {
-                lat: 35.001637,
-                lng: 135.767667
-            },
-            zoom: 15,
-        });
-     }
+　// 取得した位置情報を中心に表示
+   map = new google.maps.Map(document.getElementById('map'), {
+        center: LatLng,
+        zoom: 15
+      });
+
+　// マーカーを立てる
+      let marker = new google.maps.Marker({
+              map : map,
+              position : LatLng
+            });
+    });
+}
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer >
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:edit, :update]
     resources :users, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
+    resources :comments, only: [:index,:show, :destroy]
     resources :posts, only: [:index, :show, :edit, :destroy]
     resources :homes, only:[:top]
   end
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
     resources :genres, only:[:index, :show]
     resources :posts
     resources :users, only:[:index, :show, :edit]
+    get "my_page" => "users#show"
+    resources :comments, only: [:index,:show, :destroy]
   end
 
 
