@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title><strong>PhotoClip</strong></title>
+  </head>
+  <body>
+    <div id="sp-menu">
+      <h2>MENU</h2>
+      <% if user_signed_in? %>
+      <ul>
+        <li>
+          <%= link_to "サイトについて", about_path %>
+        </li>
+        <li>
+          <%= link_to "トップへ戻る", root_path %>
+          </li>
+        <li>
+          <%= link_to "新規登録", new_user_registration_path %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_user_session_path %>
+        </li>
+        <li>
+          <%= link_to "マイページ", mypage_path %>
+        </li>
+    　　<br>
+        <li>
+          <a href="#">マップから探す</a>
+        </li>
+        <li>
+          <a href="#">キーワードから探す</a>
+        </li>
+        <li>
+          <%= link_to "ジャンルから探す", genres_path %>
+        </li>
+        <br>
+        <li>
+          <%= link_to "写真を投稿する", new_post_path %>
+        </li>
+        <li>
+          <%= link_to "投稿を見る", posts_path %></a>
+        </li>
+      </ul>
+      <% else %>
+        <li>
+          <%= link_to "ログイン", new_user_session_path %>
+        </li>
+        <li>
+          <%= link_to "About", about_path %>
+        </li>
+      <% end %>
+    </div>
+
+    <div id="hm-icon">
+      <a class="menu-trigger" href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+  </body>
+</html>

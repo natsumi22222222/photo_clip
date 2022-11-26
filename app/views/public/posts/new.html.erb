@@ -8,15 +8,7 @@
   <%= f.text_field :body %><br>
   <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
   <%= f.label "地図情報" %>
-  <div id='map'></div>
-
-  <style>
-      #map {
-          height: 200px;
-          width: 200px;
-      }
-  </style>
-
+  <div id='map-new'></div>
   <script>
   let map
 
@@ -29,7 +21,7 @@
       LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
   　// 取得した位置情報を中心に表示
-     map = new google.maps.Map(document.getElementById('map'), {
+     map = new google.maps.Map(document.getElementById('map-new'), {
           center: LatLng,
           zoom: 15
         });

@@ -11,10 +11,19 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application.scss"
+//import "../stylesheets/application.scss"
+import "../stylesheets/application"
 
 import '@fortawesome/fontawesome-free/js/all'
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+$(function() {
+  $('.menu-trigger').on('click', function(event) {
+    $(this).toggleClass('active');
+    $('#sp-menu').fadeToggle();
+    event.preventDefault();
+  });
+});
