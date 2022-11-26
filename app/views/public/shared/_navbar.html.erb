@@ -23,7 +23,7 @@
           <%= link_to "ログイン", new_user_session_path %>
         </li>
         <li>
-          <%= link_to "マイページ", mypage_path %>
+          <%= link_to "マイページ", my_page_path %>
         </li>
     　　<br>
         <li>
@@ -45,10 +45,13 @@
       </ul>
       <% else %>
         <li>
+          <%= link_to "About", about_path %>
+        </li>
+        <li>
           <%= link_to "ログイン", new_user_session_path %>
         </li>
         <li>
-          <%= link_to "About", about_path %>
+          <%= link_to "新規登録", new_user_registration_path %>
         </li>
       <% end %>
     </div>

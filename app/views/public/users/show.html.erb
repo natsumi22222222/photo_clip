@@ -1,2 +1,10 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<h3 class= "section-ttl">マイページ</h3>
+
+<%= image_tag @user.get_profile_image(100,100) %><br>
+<label>ユーザー名:</label>
+<%= @user.name %><br>
+
+<label>自己紹介</label>
+<%= @user.introduction %>
+<br>
+<%= link_to '編集する', my_page_edit_path, class: 'btn btn-success' %>
