@@ -1,13 +1,15 @@
 <h3>写真投稿ページ</h3>
-<%= form_with model: @post, local: true, url: new_post_path do |f| %>
+<%= form_with model: @post, local: true, url: posts_path do |f| %>
 
   <%= f.file_field :image, accept: "image/*" %><br>
   <%= f.label "タイトル" %>
   <%= f.text_field :title %><br>
   <%= f.label "説明文" %>
-  <%= f.text_field :body %><br>
-  <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
+  <%= f.text_area :body %><br>
+  <%= f.label "ジャンル" %>
+  <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %><br>
   <%= f.label "地図情報" %>
+
   <div id='map-new'></div>
   <script>
   let map
@@ -38,8 +40,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
 
   <%= f.label "タグ登録" %>
-  <%#= f.text_field : %>
-  <%#= f.label "ジャンル" %>
-  <%#= f.collection_select :genre_id, Genre.all, :id, :name %>
+  <%= f.text_field :name, placeholder: ",で区切ってください" %><br>
   <%= f.submit "投稿", class: "btn btn-success" %>
 <% end %>

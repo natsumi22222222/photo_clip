@@ -1,10 +1,13 @@
 <h4>マイページ編集</h4>
 <%= form_with model: @user, url: my_page_edit_path(@user.id), method: :patch do |f| %>
 
+  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %><br>
   <%= f.label "ユーザー名" %>
   <%= f.text_field :name %><br>
 
   <%= f.label "自己紹介" %>
-  <%= f.text_area :introduction %>
+  <%= f.text_area :introduction %><br>
+
+  <%= f.submit "保存する" %>
 
 <% end %>

@@ -15,12 +15,9 @@
         </li>
         <li>
           <%= link_to "トップへ戻る", root_path %>
-          </li>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
         </li>
         <li>
-          <%= link_to "ログイン", new_user_session_path %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </li>
         <li>
           <%= link_to "マイページ", my_page_path %>

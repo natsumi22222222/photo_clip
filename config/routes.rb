@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     resources :users, only:[:index, :show, :edit]
     get "my_page" => "users#show"
     get "my_page/edit" => "users#edit"
-    patch "my_page/:id/edit" => "users#edit"
+    patch "my_page/:id/edit" => "users#:id/edit"
     resources :comments, only: [:index,:show, :destroy]
   end
 
