@@ -3,5 +3,7 @@
 <% @posts.each do |post| %>
   <%= post.title %>
   <%= post.boby %>
-
+  <% @tags.each do |tag| %>
+    <%= tag.name %>
+  <% end %>
 <% end %>

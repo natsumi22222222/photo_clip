@@ -27,10 +27,10 @@ Rails.application.routes.draw do
     resources :tags, only: [:create, :destroy, :edit, :update]
     resources :genres, only:[:index, :show]
     resources :posts
-    resources :users, only:[:index, :show, :edit]
     get "my_page" => "users#show"
     get "my_page/edit" => "users#edit"
     patch "my_page/:id/edit" => "users#:id/edit"
+    resources :users, only:[:index, :show, :edit]
     resources :comments, only: [:index,:show, :destroy]
   end
 
