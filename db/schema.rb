@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 2022_11_16_110014) do
   end
 
   create_table "post_tags", force: :cascade do |t|
-    t.string "name", null: false
     t.integer "post_id"
     t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
@@ -88,8 +87,9 @@ ActiveRecord::Schema.define(version: 2022_11_16_110014) do
     t.integer "genre_id", null: false
     t.string "title", null: false
     t.text "body", null: false
-    t.float "lat", null: false
-    t.float "lng", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.string "address"
     t.string "camera_maker"
     t.string "camera_model"
     t.string "lens"

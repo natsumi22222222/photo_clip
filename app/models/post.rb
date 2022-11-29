@@ -6,6 +6,8 @@ class Post < ApplicationRecord
   has_many :tags,through: :post_tags
   has_many :favorites, dependent: :destroy
   has_one_attached :image
+  geocoded_by :address
+  after_validation :geocode
 
   def tags_save(tag_list)
     if self.tags != nil

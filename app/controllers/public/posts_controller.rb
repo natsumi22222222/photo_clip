@@ -5,14 +5,15 @@ class Public::PostsController < ApplicationController
 
   def create
     @post= Post.new(post_params)
+    @post.user_id = current_user.id
     tag_list= params[:post][:name].split(',')
-    if @post
+    if @post.save!
       @post.tags_save(tag_list)
-      redirect_to posts_path(@post)
+      redirect_to posts_path
     else
       render:new
     end
-    @post.user_id= current_user.id
+    # @post.user_id= current_user.id
   end
 
   def index
@@ -33,6 +34,6 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:body,:lat,:lng,:image)
+    params.require(:post).permit(:title,:body,:latitude,:longitude ,:address, :image,:genre_id)
   end
 end
