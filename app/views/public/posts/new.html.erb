@@ -11,9 +11,12 @@
   <%= f.label "地図情報" %>
   <%= f.text_field :address, size: "50x1" %></br>
 
- <input id="address" type="textbox" value="">
+  <%= f.hidden_field :latitude %>
+  <%= f.hidden_field :longitude %>
+
+  <input id="address" type="textbox" value="">
   <input type="button" id="test_button" value="地図を検索" onclick="">
-  <div id="display">緯度経度が表示されるよ！</div>
+  <div id="display">緯度経度が表示</div>
 
   <div id='map'></div>
 
@@ -62,13 +65,19 @@
                     });
 
 
-                display.textContent = "検索結果：" + results[ 0 ].geometry.location
+                display.textContent = "検索結果：" + results[0].geometry.location
+                
+                debugger;
+                let hidden_latitude = document.getElementById('hidden_latitude');
+                hidden_latitude.setAttribute("value", results[0].geometry.location[1]);
+
                 } else {
                     alert('該当する結果がありませんでした：' + status);
                 }
             });
           })
       }
+
 
   </script>
 
@@ -78,3 +87,4 @@
   <%= f.text_field :name, placeholder: ",で区切ってください" %><br>
   <%= f.submit "投稿", class: "btn btn-success" %>
 <% end %>
+

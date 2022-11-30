@@ -13,7 +13,6 @@ class Public::PostsController < ApplicationController
     else
       render:new
     end
-    # @post.user_id= current_user.id
   end
 
   def index
