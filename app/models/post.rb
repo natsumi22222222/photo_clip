@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
+
   def tags_save(tag_list)
     if self.tags != nil
       post_tags_records= PostTag.where(post_id: self.id)
@@ -19,6 +20,10 @@ class Post < ApplicationRecord
       inspected_tag= Tag.where(name: tag).first_or_create
       self.tags << inspected_tag
     end
+  end
+
+  def favorited_by(user)
+    favoretes.exists?(user_id: urer.id)
   end
 
 end
