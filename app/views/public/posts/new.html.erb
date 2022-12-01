@@ -8,14 +8,13 @@
   <%= f.text_area :body %><br>
   <%= f.label "ジャンル" %>
   <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %><br>
-  <%= f.label "地図情報" %>
-  <%= f.text_field :address, size: "50x1" %></br>
 
   <%= f.hidden_field :latitude %>
   <%= f.hidden_field :longitude %>
+  <%= f.text_field :address, id: 'address' %>
 
-  <input id="address" type="textbox" value="">
-  <input type="button" id="test_button" value="地図を検索" onclick="">
+
+  <input type="button" id="button" value="地図を検索" onclick="">
   <div id="display">緯度経度が表示</div>
 
   <div id='map'></div>
@@ -35,7 +34,7 @@
       // mapの表示関数
       function initMap() {
           geocoder = new google.maps.Geocoder()
-          var marker;
+          let marker;
 
 
           // mapの初期位置, 縮尺を定義
@@ -47,8 +46,9 @@
               zoom: 12,
           });
 
-          $('#test_button').on('click', (e)=> {
+          $('#button').on('click', (e)=> {
             let inputAddress = document.getElementById('address').value;
+                               //=> $('#address').val();
             // 地図検索関数
             geocoder.geocode({
               'address': inputAddress
@@ -66,10 +66,9 @@
 
 
                 display.textContent = "検索結果：" + results[0].geometry.location
-                
-                debugger;
-                let hidden_latitude = document.getElementById('hidden_latitude');
-                hidden_latitude.setAttribute("value", results[0].geometry.location[1]);
+
+                $('#post_latitude').val(results[0].geometry.location.lat());
+                $('#post_longitude').val(results[0].geometry.location.lng());
 
                 } else {
                     alert('該当する結果がありませんでした：' + status);
