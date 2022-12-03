@@ -1,10 +1,25 @@
 <h4>写真一覧</h4>
 
 <% @posts.each do |post| %>
-  <
+  <%= image_tag post.get_image %>
   <%= post.title %>
   <%= post.body %>
+  <%= post.created_at.strftime('%Y/%m/%d') %>
   <% @tags.each do |tag| %>
     <%= tag.name %>
+  <% end %>
+
+  <% if @post.favorited_by?(current_user)  %>
+    <p>
+      <%= link_to post_favoretes_path(@post), method: :delete do %>
+        ★<%= @post.favorites.count %>お気に入り
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <% link_to post_favoretes_path(@post)  do %>
+      ☆<%= @post.favorites.count %>お気に入り
+      <% end %>
+    </p>
   <% end %>
 <% end %>

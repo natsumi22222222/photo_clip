@@ -9,6 +9,13 @@ class Post < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
+  def get_image
+    unless image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpeg')
+    end
+    image.variant(resize_to_limit: [300, 300]).processed
+  end
 
   def tags_save(tag_list)
     if self.tags != nil
@@ -22,7 +29,7 @@ class Post < ApplicationRecord
     end
   end
 
-  def favorited_by(user)
+  def favorited_by?(user)
     favoretes.exists?(user_id: urer.id)
   end
 
