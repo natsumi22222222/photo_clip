@@ -5,20 +5,17 @@
   <%= post.title %>
   <%= post.body %>
   <%= post.created_at.strftime('%Y/%m/%d') %>
-  <% @tags.each do |tag| %>
-    <%= tag.name %>
-  <% end %>
 
    <% if post.favorited_by?(current_user) %>
     <p>
       <%= link_to post_favorites_path(post), method: :delete do %>
-        ♥<%= post.favorites.count %> いいね
+        ★<%= post.favorites.count %> お気に入り解除
       <% end %>
     </p>
     <% else %>
     <p>
-      <%= link_to post_favoretes_path(post), method: :post do %>
-        ♡<%= post.favorites.count %> いいね
+      <%= link_to post_favorites_path(post), method: :post do %>
+        ☆<%= post.favorites.count %> お気に入り
       <% end %>
     </p>
   <% end %>

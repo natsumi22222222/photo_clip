@@ -19,7 +19,6 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts= Post.all
-    @tags= Tag.all
   end
 
   def show
@@ -30,6 +29,7 @@ class Public::PostsController < ApplicationController
   def exif
     @post= find(params[:id])
     @posts= @user.posts
+    @comment= Comment.new
   end
 
   private

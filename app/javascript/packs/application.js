@@ -26,3 +26,5 @@ $(function() {
     event.preventDefault();
   });
 });
+
+// $('#favorite_<%= @post.id %>').html("<%= j(render partial: 'favorites/favorite', post: @post ) %>");
