@@ -22,8 +22,7 @@ class Public::PostsController < ApplicationController
   end
 
   def show
-    @post= find(params[:id])
-    @posts= @user.posts
+    @post= Post.find(params[:id])
   end
 
   def exif

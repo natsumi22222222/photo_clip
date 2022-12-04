@@ -1,7 +1,9 @@
 <h4>写真一覧</h4>
 
 <% @posts.each do |post| %>
-  <%= image_tag post.get_image %>
+  <%= link_to post_path(post.id) do %>
+    <%= image_tag post.get_image %>
+  <% end %>
   <%= post.title %>
   <%= post.body %>
   <%= post.created_at.strftime('%Y/%m/%d') %>
