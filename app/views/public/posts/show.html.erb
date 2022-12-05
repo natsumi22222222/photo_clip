@@ -1,3 +1,22 @@
 
 <%= image_tag @post.get_image %>
 <%= @post.user.name %>
+
+<div>
+  <p>コメント件数<%= @post.comments.count %></p>
+  <% @post.comments.each do |comment| %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <% if comment.user == current_user %>
+      <%= link_to "削除", post_comment_path(comment.post,comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+  <%= form_with model: [@post,@comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "コメントする" %>
+  <% end %>
+</div>
+
+
