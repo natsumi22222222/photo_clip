@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2022_11_16_110014) do
     t.integer "genre_id", null: false
     t.string "title", null: false
     t.text "body", null: false
+    t.integer "release"
     t.float "latitude", null: false
     t.float "longitude", null: false
     t.string "address"

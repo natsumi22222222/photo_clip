@@ -6,6 +6,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.integer :genre_id,   null: false
       t.string :title,    null: false
       t.text :body,    null: false
+      t.integer :release
       t.float :latitude,        null: false
       t.float :longitude,        null: false
       t.string :address

@@ -18,7 +18,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts= Post.all
+    @posts= Post.where(release:1).order(id: "DESC")
   end
 
   def show
@@ -35,6 +35,6 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:body,:latitude,:longitude ,:address, :image,:genre_id)
+    params.require(:post).permit(:title,:body,:latitude,:longitude ,:address, :image,:release, :genre_id)
   end
 end

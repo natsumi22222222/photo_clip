@@ -84,6 +84,10 @@
 
   <%= f.label "タグ登録" %>
   <%= f.text_field :name, placeholder: ",で区切ってください" %><br>
-  <%= f.submit "投稿", class: "btn btn-success" %>
+  <%= f.radio_button :release, '1' %>
+  <%= f.label :release, '公開', value: 1 %>
+   <%= f.radio_button :release, '0' %>
+   <%= f.label :release, '非公開', value: 0 %>
+  <%= f.submit "投稿" %>
 <% end %>
 
