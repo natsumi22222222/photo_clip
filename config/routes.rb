@@ -12,12 +12,15 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    resources :tags, only: [:edit, :update]
+    resources :tags, only: [:index, :edit, :update]
     resources :users, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :comments, only: [:index,:show, :destroy]
     resources :posts, only: [:index, :show, :edit, :destroy]
-    resources :homes, only:[:top]
+  end
+
+  scope module: :admin do
+    get "admin" => "homes#top", as: :admin_top
   end
 
    scope module: :public do

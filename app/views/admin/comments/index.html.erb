@@ -1,5 +1,10 @@
 <h1>コメント一覧</h1>
 
-<% @comments.each do |comment| %>
-  <%= comment.comment %>
+<% if @comments.present? %>
+  <% @comments.each do |comment| %>
+    <%= comment.comment %>
+    <%= link_to "削除する",admin_comment_path(comment.id), method: :delete, data: {confirm: "削除しますか？"} %>
+  <% end %>
+<% else %>
+  <p>コメントがありません。</p>
 <% end %>

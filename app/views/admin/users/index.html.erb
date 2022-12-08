@@ -1,2 +1,5 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<% @users.each do |user| %>
+  <%#= image_tag @user.get_profile_image(100,100) %>
+  <%= link_to "詳細を見る", admin_user_path(user.id) %>
+  <%= link_to "編集する",edit_admin_user_path(user.id) %>
+<% end %>

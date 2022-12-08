@@ -1,2 +1,8 @@
-<h1>Admin::Posts#index</h1>
-<p>Find me in app/views/admin/posts/index.html.erb</p>
+<h1>投稿管理</h1>
+<% @posts.each do |post| %>
+   <%= image_tag post.get_image %>
+  <%= post.title %>
+  <%= post.body %>
+  <%= link_to "編集する",edit_admin_post_path(post.id) %>
+  <%= link_to "削除する",admin_post_path(post.id), method: :delete, data: {confirm: "削除しますか？"} %>
+<% end %>
