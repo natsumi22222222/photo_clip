@@ -27,9 +27,7 @@ class Public::PostsController < ApplicationController
   end
 
   def exif
-    @post= find(params[:id])
-    @posts= @user.posts
-    @comment= Comment.new
+    @post= Post.find(params[:id])
   end
 
   private

@@ -95,6 +95,11 @@
   width: 200px;
 }
 
+#map {
+  height: 400px;
+  width: 400px;
+}
+
 
 .genre-wrap img{
   background-color: black;
@@ -104,6 +109,8 @@
 .genre-wrap img:hover {
  opacity: 0.5;
 }
+
+
 
 .genre-wrap:after{
     position: absolute;

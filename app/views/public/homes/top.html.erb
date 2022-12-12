@@ -1,33 +1,71 @@
-<%= link_to "マップから写真を探す" %>
+<div class="container">
+  <div class= "row">
 
-<div id='map'>
+      <input type="text" id="address">
+      <input type="button" id="button" value="地図を検索" onclick="">
+        <div id="display"></div>
 
+        <div id='map'></div>
+
+        <style>
+            #map {
+                height: 400px;
+                width: 1000px;
+            }
+        </style>
+
+        <script>
+            let map
+
+            const display = document.getElementById('display')
+
+            // mapの表示関数
+            function initMap() {
+                geocoder = new google.maps.Geocoder()
+                let marker;
+
+
+                // mapの初期位置, 縮尺を定義
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {
+                        lat: 35.6458437,
+                        lng: 139.7046171
+                    },
+                    zoom: 12,
+                });
+
+                $('#button').on('click', (e)=> {
+                  let inputAddress = document.getElementById('address').value;
+                                     //=> $('#address').val();
+                  // 地図検索関数
+                  geocoder.geocode({
+                    'address': inputAddress
+                    }, function (results, status) {
+                      if (status == 'OK') {
+                          map.setCenter(results[0].geometry.location);
+
+                          if(marker != null){
+                            marker.setMap(null);
+                  　　　  　　}
+                            marker = new google.maps.Marker({
+                              map: map,
+                              position: results[0].geometry.location
+                          });
+
+
+                      display.textContent = "検索結果：" + results[0].geometry.location
+
+
+                      } else {
+                          alert('該当する結果がありませんでした：' + status);
+                      }
+                  });
+                })
+            }
+
+
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
+  </div>
 </div>
-
-<script>
-let map
-
- const display = document.getElementById('display')
-
-function initMap(){
-
-　// 位置情報を取得する
-  navigator.geolocation.getCurrentPosition(function (position) {
-    LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-　// 取得した位置情報を中心に表示
-   map = new google.maps.Map(document.getElementById('map'), {
-        center: LatLng,
-        zoom: 15
-      });
-
-　// マーカーを立てる
-      let marker = new google.maps.Marker({
-              map : map,
-              position : LatLng
-            });
-    });
-}
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>

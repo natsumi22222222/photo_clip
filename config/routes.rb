@@ -29,10 +29,12 @@ Rails.application.routes.draw do
     get 'about' => 'homes#about'
     resources :tags, only: [:create, :destroy, :edit, :update]
     resources :genres, only:[:index, :show]
+    get 'nature' => 'genres#nature'
     resources :posts do
       resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create, :destroy]
     end
+    get "/posts/:id/exif" => "posts#exif", as: :exif
     get "my_page" => "users#show"
     get "my_page/edit" => "users#edit"
     patch "my_page/:id/edit" => "users#:id/edit"

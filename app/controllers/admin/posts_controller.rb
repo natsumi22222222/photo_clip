@@ -8,6 +8,13 @@ class Admin::PostsController < ApplicationController
   end
 
   def edit
+    @post= Post.find(params[:id])
+  end
+
+  def update
+     @post= Post.find(params[:id])
+     @post.update
+     redirect_to request.referer
   end
 
   def destroy

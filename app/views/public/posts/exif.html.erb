@@ -1,0 +1,96 @@
+<div class="container">
+    <%= image_tag @post.get_image, id: 'image', class: 'img-fluid d-block mx-auto' %>
+    <div class="row">
+        <div class="col-md-3">カメラメーカー</div>
+        <div class="col-md-9" id="maker"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">カメラモデル</div>
+        <div class="col-md-9" id="model"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">カメラレンズ</div>
+        <div class="col-md-9" id="lens"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">撮影日時</div>
+        <div class="col-md-9" id="datetime"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">元画像サイズ(横)</div>
+        <div class="col-md-9" id="width"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">元画像サイズ(縦)</div>
+        <div class="col-md-9" id="height"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">元画像サイズ(単位)</div>
+        <div class="col-md-9" id="unit"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">ISO感度</div>
+        <div class="col-md-9" id="iso"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">焦点距離</div>
+        <div class="col-md-9" id="focal_length"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">露出補正</div>
+        <div class="col-md-9" id="exposure_time"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">シャッタースピード</div>
+        <div class="col-md-9" id="shutter_speed_value"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">絞り</div>
+        <div class="col-md-9" id="aperture_value"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">ソフトウェア</div>
+        <div class="col-md-9" id="software"></div>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+
+<script>
+$(document).ready(function(){
+    let img = document.getElementById("image");
+    EXIF.getData(img, function() {
+        let exif = EXIF.getAllTags(this);
+
+        // console.log(exif);
+
+        $('#maker').text(exif.Make);
+        $('#model').text(exif.Model);
+        $('#lens').text(exif.LensMake);
+        $('#datetime').text(exif.DateTimeOriginal);
+        $('#width').text(exif.PixelXDimension)
+        $('#height').text(exif.PixelYDimension)
+
+        switch (exif.FocalPlaneResolutionUnit) {
+          case 2:
+            $('#unit').text('インチ')
+            break;
+          case 3:
+            $('#unit').text('センチメートル')
+            break;
+          default:
+            $('#unit').text('判定不能')
+        }
+
+        $('#iso').text(exif.ISOSpeedRatings)
+        $('#focal_length').text(exif.FocalLength)
+        $('#exposure_time').text(exif.ExposureTime)
+        $('#shutter_speed_value').text(exif.ShutterSpeedValue)
+        $('#aperture_value').text(exif.ApertureValue)
+        $('#software').text(exif.Software)
+
+    });
+});
+</script>
