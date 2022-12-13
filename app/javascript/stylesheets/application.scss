@@ -16,7 +16,7 @@
 #hm-icon {
   position: fixed;
   right: 20px;
-  top: 20px;
+  top: 12px;
   z-index: 10;
 }
 .menu-trigger,
@@ -82,17 +82,15 @@
   font-weight: bold;
 }
 
+.navbar-height{
+  height: 65px;
+}
+
 
 #top-map {
   height: 400px;
   width: 1000px;
   }
-
-
-#map {
-    height: 500px;
-    width: 70%;
-    }
 
 #map-new{
   height: 200px;
@@ -100,8 +98,10 @@
 }
 
 #map {
-  height: 400px;
-  width: 400px;
+  height: 390px;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 400px;
 }
 
 
@@ -129,11 +129,11 @@
 }
 
 .ttl {
-font-size: 30px;
-font-weight: bold;
-color: white;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%,-50%);
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
