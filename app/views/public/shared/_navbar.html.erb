@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title><strong>PhotoClip</strong></title>
-  </head>
-  <body>
-    <div id="sp-menu">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+      <title><strong>PhotoClip</strong></title>
+    </head>
+
+    <body>
+      <nav class="navbar navbar-light bg-light">
+      <a href="#" class="navbar-brand"><strong>PhotoClip</strong></a>
+       <div id="sp-menu">
       <h2>MENU</h2>
       <% if user_signed_in? %>
       <ul>
@@ -60,5 +63,7 @@
         <span></span>
       </a>
     </div>
+  </nav>
+
   </body>
 </html>

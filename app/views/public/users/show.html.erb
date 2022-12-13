@@ -1,10 +1,15 @@
-<h3 class= "section-ttl">マイページ</h3>
+<div class="container">
 
-<%= image_tag @user.get_profile_image(100,100) %><br>
-<label>ユーザー名:</label>
-<%= @user.name %><br>
-
-<label>自己紹介</label>
-<%= @user.introduction %>
-<br>
-<%= link_to '編集する', my_page_edit_path, class: 'btn btn-success' %>
+  <h3>マイページ</h3>
+  <div class= "row m-3">
+  <%= image_tag @user.get_profile_image(200,200) %><br>
+    <table class="table">
+      <tbody>
+        <th>ユーザー名:</th>
+        <td> <%= @user.name %></td>
+        <th>自己紹介:</th>
+        <td><%= @user.introduction %></td>
+      </tbody>
+    </table>
+  </div>
+</div>

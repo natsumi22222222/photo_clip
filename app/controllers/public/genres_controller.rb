@@ -13,6 +13,10 @@ class Public::GenresController < ApplicationController
   end
 
   def nature
-    @genre = Genre.where(name: "自然")
+    # if params[:genre_id].present?
+    #   @genre= Genre.find(params[1])
+    #   @posts= post.genre_id
+    # end
+    @genre = Genre.find(genre_id: 1)
   end
 end
