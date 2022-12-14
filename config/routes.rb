@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:create, :destroy, :edit, :update]
     resources :genres, only:[:index, :show]
     get 'nature' => 'genres#nature'
+    get 'sports' => 'genres#sports'
     resources :posts do
       resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create, :destroy]

@@ -10,9 +10,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* ---------------------------- */
-/* ---- ハンバーガーアイコン ---- */
-/* ---------------------------- */
+
+// ハンバーガーアイコン
+
 #hm-icon {
   position: fixed;
   right: 20px;
@@ -86,6 +86,27 @@
   height: 65px;
 }
 
+h1 {
+  display: inline-block;
+  position: relative;
+  color: #6594e0;
+  border-bottom: dashed 2px #6594e0;
+}
+
+h1:before {
+　display: inline-block;
+　position: absolute;
+　content: '';
+  bottom: -10px;
+  left: 50%;
+  width: 30px;
+  height: 2px;
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translate(-50%);
+  background-color: #666666;
+}
 
 #top-map {
   height: 400px;
@@ -103,7 +124,6 @@
   margin: 0 auto;
   max-width: 400px;
 }
-
 
 
 .genre-wrap img{
