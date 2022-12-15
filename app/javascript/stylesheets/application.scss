@@ -86,27 +86,6 @@
   height: 65px;
 }
 
-h1 {
-  display: inline-block;
-  position: relative;
-  color: #6594e0;
-  border-bottom: dashed 2px #6594e0;
-}
-
-h1:before {
-　display: inline-block;
-　position: absolute;
-　content: '';
-  bottom: -10px;
-  left: 50%;
-  width: 30px;
-  height: 2px;
-  -moz-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translate(-50%);
-  background-color: #666666;
-}
 
 #top-map {
   height: 400px;
@@ -125,6 +104,47 @@ h1:before {
   max-width: 400px;
 }
 
+.icon-wrapper{
+  text-align: center;
+}
+
+.copy{
+
+}
+
+.marker-image{
+  height: auto;
+  width: 100%;
+  max-width: 50px;
+  margin: 0 auto;
+}
+
+h1{
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
+.about-map{
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 900px;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+.about-wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: lightgray;
+}
+
+.item {
+  padding: 30px;
+  width: 32%;
+  background-color: #fff;
+}
 
 .genre-wrap img{
   background-color: black;

@@ -1,22 +1,26 @@
-<div class="container">
-  <div class= "row m-3">
-      <div id="display top-image"></div>
-      <div id='top-map'></div>
-      <!--<input type="text" id="address" class= "form-control" type="text" placeholder="Default input" aria-label="default input example">-->
-      <!--<input type="button" id="button" value="マップから写真を探す" onclick="" class= "btn btn-primary">-->
+<div class="icon-wrapper m-3">
+  <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
+  <div class= "container">
+    <p id="copy">お気に入りの被写体を探しに出かけよう</p>
+    <div class= "row m-3">
+        <div id= "display top-image"></div>
+        <div id= 'top-map'></div>
+        <!--<input type="text" id="address" class= "form-control" type="text" placeholder="Default input" aria-label="default input example">-->
+        <!--<input type="button" id="button" value="マップから写真を探す" onclick="" class= "btn btn-primary">-->
 
-      <form class="d-flex justify-content-center col-12 mt-3">
-      <form class="d-flex justify-content-center col-12 mt-3">
+        <form class= "d-flex justify-content-center col-12 mt-3">
+        <form class= "d-flex justify-content-center col-12 mt-3">
 
-        <div class="mx-3">
-          <input type="text" id="address" class= "form-control" type="text" placeholder="場所を入れてください" aria-label="default input example">
+          <div class= "mx-3">
+            <input type= "text" id= "address" class= "form-control" type= "text" placeholder= "場所を入れてください" aria-label= "default input example">
 
-        </div>
-        <div class="mx-3">
-          <input type="button" id="button" value="マップから写真を探す" onclick="" class= "btn btn-primary">
-        </div>
-      </form>
-      <script>
+          </div>
+          <div class= "mx-3">
+            <input type= "button" id= "button" value= "マップから写真を探す" onclick= "" class= "btn btn-primary">
+          </div>
+        </form>
+
+        <script>
           let map
 
           const display = document.getElementById('display')
@@ -64,8 +68,9 @@
                 });
               })
           }
-      </script>
+        </script>
 
-      <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
+    </div>
   </div>
 </div>
