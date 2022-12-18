@@ -1,82 +1,77 @@
-<!--<div id="container skip">-->
-<!--      <div id="theTarget">-->
-<!--        <div class="image1"></div>-->
-<!--        <div class="image2"></div>-->
-<!--        <div class="image3"></div>-->
-<!--        <div class="image4"></div>-->
-<!--        <div class="image5"></div>-->
-<!--      </div>-->
-<!--    </div>-->
-<div class="icon-wrapper">
-  <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
-  <div class= "container">
-    <p id="copy">お気に入りの写真を探しに出かけよう</p>
-    <div class= "row">
-        <div id= "display top-image"></div>
-        <div id= 'top-map'></div>
+<div class= "container text-center">
+    <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
+  <div class= "row">
+    <div class= "col-12 text-center mt-2 mb-3">
+      <p>お気に入りの写真を探しに出かけよう</p>
+    </div>
+  </div>
+
+  <div class= "row text-center">
+      <div id= "display top-image"></div>
+      <div id= 'top-map'></div>
         <!--<input type="text" id="address" class= "form-control" type="text" placeholder="Default input" aria-label="default input example">-->
         <!--<input type="button" id="button" value="マップから写真を探す" onclick="" class= "btn btn-primary">-->
 
-        <form class= "col-12 mt-3">
-          <div class= "mx-3">
-            <input type= "text" id= "address" class= "form-control mb-3 top-form" type= "text" placeholder= "場所を入れてください" aria-label= "default input example">
-          </div>
-          <div class= "mx-3">
-            <input type= "button" id= "button" value= "マップから探す" onclick= "" class= "btn btn-md btn-primary mb-5 top-button">
-          </div>
-        </form>
+      <form class= "col-12 mt-3">
+        <div class= "mx-3">
+          <input type= "text" id= "address" class= "form-control mb-3 top-form" type= "text" placeholder= "場所を入れてください" aria-label= "default input example">
+        </div>
+        <div class= "mx-3">
+          <input type= "button" id= "button" value= "マップから探す" onclick= "" class= "btn btn-md btn-primary mb-5 top-button">
+        </div>
+      </form>
 
-        <script>
-          let map
+      <script>
+        let map
 
-          const display = document.getElementById('display')
+        const display = document.getElementById('display')
 
-          // mapの表示関数
-          function initMap() {
-              geocoder = new google.maps.Geocoder()
-              let marker;
+        // mapの表示関数
+        function initMap() {
+            geocoder = new google.maps.Geocoder()
+            let marker;
 
 
-              // mapの初期位置, 縮尺を定義
-              map = new google.maps.Map(document.getElementById('top-map'), {
-                  center: {
-                      lat: 35.6458437,
-                      lng: 139.7046171
-                  },
-                  zoom: 12,
+            // mapの初期位置, 縮尺を定義
+            map = new google.maps.Map(document.getElementById('top-map'), {
+                center: {
+                    lat: 35.6458437,
+                    lng: 139.7046171
+                },
+                zoom: 12,
+            });
+
+            $('#button').on('click', (e)=> {
+              let inputAddress = document.getElementById('address').value;
+
+              // 地図検索関数
+              geocoder.geocode({
+                'address': inputAddress
+                }, function (results, status) {
+                  if (status == 'OK') {
+                      map.setCenter(results[0].geometry.location);
+
+                      if(marker != null){
+                        marker.setMap(null);
+              　　　  　　}
+                        marker = new google.maps.Marker({
+                          map: map,
+                          position: results[0].geometry.location
+                      });
+
+
+                  display.textContent = "検索結果：" + results[0].geometry.location
+
+
+                  } else {
+                      alert('該当する結果がありませんでした：' + status);
+                  }
               });
+            })
+        }
+      </script>
 
-              $('#button').on('click', (e)=> {
-                let inputAddress = document.getElementById('address').value;
-
-                // 地図検索関数
-                geocoder.geocode({
-                  'address': inputAddress
-                  }, function (results, status) {
-                    if (status == 'OK') {
-                        map.setCenter(results[0].geometry.location);
-
-                        if(marker != null){
-                          marker.setMap(null);
-                　　　  　　}
-                          marker = new google.maps.Marker({
-                            map: map,
-                            position: results[0].geometry.location
-                        });
-
-
-                    display.textContent = "検索結果：" + results[0].geometry.location
-
-
-                    } else {
-                        alert('該当する結果がありませんでした：' + status);
-                    }
-                });
-              })
-          }
-        </script>
-
-        <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
     </div>
   </div>
 </div>

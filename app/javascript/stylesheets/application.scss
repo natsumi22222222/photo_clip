@@ -20,7 +20,7 @@ body{
       "Hiragino Sans",
       Meiryo,
       sans-serif;
-  font-size: 24px;
+  font-size: 21px;
 }
 
 header{
@@ -104,6 +104,12 @@ header{
   height: 65px;
 }
 
+.container{
+  margin-top: 100px;
+  margin-bottom: 200px;
+
+}
+
 
 #top-map {
   height: 500px;
@@ -136,8 +142,8 @@ header{
   margin-top: 18px;
 }
 
-.copy{
-  border-bottom: solid 3px grey;
+.favorite-image{
+  text-align: center;
 }
 
 .marker-image{
@@ -195,7 +201,6 @@ h1{
 
 h3{
   padding-bottom: 55px;
-  padding-top: 80px;
 }
 
 .img-1,.img-15{
@@ -211,3 +216,8 @@ h3{
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+.new-image{
+  padding-bottom: 20px;
+}
+

@@ -1,7 +1,6 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 text-center">
-
         <h2 class= "section-ttl">写真投稿ページ</h2>
 
           <%= form_with model: @post, local: true, url: posts_path do |f| %>
@@ -85,6 +84,8 @@
              <%= f.label :release, '非公開', value: 0 %>
             <%= f.submit "投稿" %>
           <% end %>
+
+
         </div>
     </div>
   </div>
