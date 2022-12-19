@@ -1,7 +1,10 @@
 <div class="container">
   <div class="row text-center">
     <div class= "col-12">
-        <%= image_tag @post.get_image, class: "show-image" %>
+      <%= image_tag @post.get_image, class: "show-image" %>
+      <div class="balloon">
+        <%= link_to "exif情報を表示", exif_path, class: "text-decoration-none text-secondary" %>
+      </div>
     </div>
   </div>
   <div class="row text-center mt-5">
@@ -12,10 +15,12 @@
       <% end %>
     </div>
   </div>
-
-  <div class= "row">
-    <div>
-      <p>コメント件数<%= @post.comments.count %>件</p>
+  <div class="row">
+    <div class="col-12 show-border"></div>
+  </div>
+  <div class= "row mt-5">
+     <div class= "col-12">
+      <p>コメント件数(全<%= @post.comments.count %>件)</p>
       <% @post.comments.each do |comment| %>
         <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
         <% if comment.user == current_user %>
@@ -24,7 +29,9 @@
       <% end %>
     </div>
   </div>
+  <div class= "row">
+    <div class= "col-12">
 
-        <%= link_to "写真のexif情報を表示する", exif_path %>
-      </div>
+    </div>
+  </div>
 </div>
