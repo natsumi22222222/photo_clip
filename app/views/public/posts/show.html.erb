@@ -1,31 +1,30 @@
-
-
 <div class="container">
-  <div class="row">
+  <div class="row text-center">
     <div class= "col-12">
-        <div>
-          <%= image_tag @post.get_image, size: "200×200" %>
-        </div>
-        <div>
-          <%= @post.user.name %>
-          <p>コメント件数<%= @post.comments.count %>件</p>
-          <% @post.comments.each do |comment| %>
-            <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-            <% if comment.user == current_user %>
-              <%= link_to "削除", post_comment_path(comment.post,comment), method: :delete %>
-            <% end %>
-          <% end %>
-        </div>
+        <%= image_tag @post.get_image, class: "show-image" %>
+    </div>
+  </div>
+  <div class="row text-center mt-5">
+    <div class= "col-12">
+      <%= form_with model: [@post,@comment] do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントを入力", class: "form-control" %>
+        <%= f.submit "コメントする", class: "btn btn-success mt-5" %>
+      <% end %>
+    </div>
+  </div>
 
-        <div>
-          <%= form_with model: [@post,@comment] do |f| %>
-            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-            <%= f.submit "コメントする" %>
-          <% end %>
-        </div>
+  <div class= "row">
+    <div>
+      <p>コメント件数<%= @post.comments.count %>件</p>
+      <% @post.comments.each do |comment| %>
+        <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+        <% if comment.user == current_user %>
+          <%= link_to "削除", post_comment_path(comment.post,comment), method: :delete %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
         <%= link_to "写真のexif情報を表示する", exif_path %>
       </div>
-    </div>
-  </div>
 </div>

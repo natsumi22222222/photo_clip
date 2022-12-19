@@ -221,3 +221,16 @@ h3{
   padding-bottom: 20px;
 }
 
+.post-image{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: 0 0;
+  }
+
+.show-image{
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 480px
+  }

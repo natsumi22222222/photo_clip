@@ -1,15 +1,23 @@
 <div class="container">
+  <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
+  <h3 class= "text-center">マイページ</h3>
+  <div class= "row">
+    <div class="col-4">
+      <%= image_tag @user.get_profile_image(200,200) %>
+    </div>
 
-  <h3>マイページ</h3>
-  <div class= "row m-3">
-  <%= image_tag @user.get_profile_image(200,200) %><br>
-    <table class="table">
-      <tbody>
-        <th>ユーザー名:</th>
-        <td> <%= @user.name %></td>
-        <th>自己紹介:</th>
-        <td><%= @user.introduction %></td>
-      </tbody>
-    </table>
+    <div class="col-8">
+      ユーザー名:
+      <%= @user.name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-8">
+      自己紹介:
+      <%= @user.introduction %>
+    </div>
+  </div>
   </div>
 </div>
