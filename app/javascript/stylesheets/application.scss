@@ -232,42 +232,25 @@ h3{
     height: auto;
     width: 100%;
     margin: 0 auto;
-    max-width: 480px
+    max-width: 620px;
   }
 
 .balloon{
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0 1.5em 15px;
-  padding: 0 5px;
-  width: 134px;
-  height: 95px;
-  line-height: 90px;
-  text-align: center;
   color: #FFF;
   font-size: 16px;
   font-weight: bold;
-  background: #ADD8E6;
-  border-radius: 50%;
-  box-sizing: border-box;
-  text-decoration: none;
-}
-
-.balloon:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -25px;
-  margin-top: -15px;
-  border: 15px solid transparent;
-  border-right: 15px solid #ADD8E6;
-  z-index: 0;
+  margin-top: 20px;
   text-decoration: none;
 }
 
 .show-border{
-  border: 2px solid #ADD8E6;
-  margin-top: 45px;
-  margin-bottom: 45px;
+  border: 1px solid #ADD8E6;
+  margin-top: 111px;
+  margin-bottom: 79px;
+}
+
+.show-wrap{
+  display: flex;
+  flex-flow: column;
 }
 

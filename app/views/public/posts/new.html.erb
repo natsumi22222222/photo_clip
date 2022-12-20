@@ -1,25 +1,25 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12 text-center">
-        <h2 class= "section-ttl">写真投稿ページ</h2>
-
+    <div class="col-12 text-center">
+        <img src= '/assets/marker.jpeg' alt= "" class= "marker-image">
+        <h3 class= "section-ttl">写真投稿ページ</h3>
           <%= form_with model: @post, local: true, url: posts_path do |f| %>
 
-            <%= f.file_field :image, accept: "image/*" %><br>
+            <%= f.file_field :image, accept: "image/*", class: "formFile" %><br>
             <%= f.label "タイトル" %>
-            <%= f.text_field :title %><br>
+            <%= f.text_field :title, class: "form-control" %><br>
             <%= f.label "説明文" %>
-            <%= f.text_area :body %><br>
+            <%= f.text_area :body, class: "form-control" %><br>
             <%= f.label "ジャンル" %>
             <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %><br>
 
             <%= f.hidden_field :latitude %>
             <%= f.hidden_field :longitude %>
-            <%= f.text_field :address, id: 'address' %>
+            <%= f.text_field :address, id: 'address', class: "form-control"  %>
 
 
             <input type="button" id="button" value="地図を検索" onclick="">
-            <div id="display">緯度経度が表示</div>
+            <div id="display">緯度経度が表示されます</div>
 
             <div id='map'></div>
             <script>

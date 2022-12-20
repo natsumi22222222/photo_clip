@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get "admin" => "homes#top", as: :admin_top
   end
 
-   scope module: :public do
+  scope module: :public do
     post '/homes/guest_sign_in', to: 'homes#new_guest'
     root to: 'homes#top'
     get 'about' => 'homes#about'
@@ -38,8 +38,8 @@ Rails.application.routes.draw do
     get "/posts/:id/exif" => "posts#exif", as: :exif
     get "my_page" => "users#show"
     get "my_page/edit" => "users#edit"
-    patch "my_page/:id/edit" => "users#:id/edit"
-    resources :users, only:[:index, :show, :edit]
+    patch "my_page/:id" => "users#update"
+    resources :users, only:[:index, :show, :edit, :update]
 
   end
 
