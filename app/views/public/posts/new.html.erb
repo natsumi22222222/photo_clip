@@ -1,91 +1,92 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center">
-        <img src= '/assets/marker.jpeg' alt= "" class= "marker-image">
-        <h3 class= "section-ttl">写真投稿ページ</h3>
-          <%= form_with model: @post, local: true, url: posts_path do |f| %>
+      <img src= '/assets/marker.jpeg' alt= "" class= "marker-image">
+      <h3 class= "section-ttl">写真投稿ページ</h3>
+        <%= form_with model: @post, local: true, url: posts_path do |f| %>
 
-            <%= f.file_field :image, accept: "image/*", class: "formFile" %><br>
-            <%= f.label "タイトル" %>
-            <%= f.text_field :title, class: "form-control" %><br>
-            <%= f.label "説明文" %>
-            <%= f.text_area :body, class: "form-control" %><br>
-            <%= f.label "ジャンル" %>
-            <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %><br>
-
-            <%= f.hidden_field :latitude %>
-            <%= f.hidden_field :longitude %>
-            <%= f.text_field :address, id: 'address', class: "form-control"  %>
+          <%= f.file_field :image, accept: "image/*", class: "mb-3" %><br>
+          <%= f.label "タイトル" %>
+          <%= f.text_field :title %><br>
+          <%= f.label "説明" %>
+          <%= f.text_area :body %><br>
+          <%= f.label "ジャンル" %>
+          <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), id: "genre-select" %><br>
 
 
-            <input type="button" id="button" value="地図を検索" onclick="">
-            <div id="display">緯度経度が表示されます</div>
+          <div id="display">ここに緯度経度が表示されます</div>
 
-            <div id='map'></div>
-            <script>
-                let map
+          <div id='map'></div>
+          <script>
+            let map
 
-                const display = document.getElementById('display')
+            const display = document.getElementById('display')
 
-                // mapの表示関数
-                function initMap() {
-                    geocoder = new google.maps.Geocoder()
-                    let marker;
-
-
-                    // mapの初期位置, 縮尺を定義
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: {
-                            lat: 35.6458437,
-                            lng: 139.7046171
-                        },
-                        zoom: 12,
-                    });
-
-                    $('#button').on('click', (e)=> {
-                      let inputAddress = document.getElementById('address').value;
-                                         //=> $('#address').val();
-                      // 地図検索関数
-                      geocoder.geocode({
-                        'address': inputAddress
-                        }, function (results, status) {
-                          if (status == 'OK') {
-                              map.setCenter(results[0].geometry.location);
-
-                              if(marker != null){
-                                marker.setMap(null);
-                      　　　  　　}
-                                marker = new google.maps.Marker({
-                                  map: map,
-                                  position: results[0].geometry.location
-                              });
+            // mapの表示関数
+            function initMap() {
+                geocoder = new google.maps.Geocoder()
+                let marker;
 
 
-                          display.textContent = "検索結果：" + results[0].geometry.location
+                // mapの初期位置, 縮尺を定義
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {
+                        lat: 35.6458437,
+                        lng: 139.7046171
+                    },
+                    zoom: 12,
+                });
 
-                          $('#post_latitude').val(results[0].geometry.location.lat());
-                          $('#post_longitude').val(results[0].geometry.location.lng());
+                $('#button').on('click', (e)=> {
+                  let inputAddress = document.getElementById('address').value;
+                                     //=> $('#address').val();
+                  // 地図検索関数
+                  geocoder.geocode({
+                    'address': inputAddress
+                    }, function (results, status) {
+                      if (status == 'OK') {
+                          map.setCenter(results[0].geometry.location);
 
-                          } else {
-                              alert('該当する結果がありませんでした：' + status);
-                          }
-                      });
-                    })
-                }
-            </script>
+                          if(marker != null){
+                            marker.setMap(null);
+                  　　　  　　}
+                            marker = new google.maps.Marker({
+                              map: map,
+                              position: results[0].geometry.location
+                          });
 
-            <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
 
-            <%= f.label "タグ登録" %>
-            <%= f.text_field :name, placeholder: ",で区切ってください" %><br>
+                      display.textContent = "検索結果：" + results[0].geometry.location
+
+                      $('#post_latitude').val(results[0].geometry.location.lat());
+                      $('#post_longitude').val(results[0].geometry.location.lng());
+
+                      } else {
+                          alert('該当する結果がありませんでした：' + status);
+                      }
+                  });
+                })
+            }
+          </script>
+
+          <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
+          <%= f.hidden_field :latitude %>
+          <%= f.hidden_field :longitude %>
+          <%= f.text_field :address, id: 'address', class: "mt-3" %>
+          <input type= "button" id= "button" class= "btn btn-outline-primary" value="地図を検索" onclick="">
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-12 text-center">
+            <%= f.label "タグ登録", class: "mt-5" %>
+            <%= f.text_field :name, placeholder: ",で区切ってください", class: "mb-3" %><br>
             <%= f.radio_button :release, '1', checked: "checked" %>
             <%= f.label :release, '公開', value: 1 %>
              <%= f.radio_button :release, '0' %>
-             <%= f.label :release, '非公開', value: 0 %>
-            <%= f.submit "投稿" %>
+             <%= f.label :release, '非公開', value: 0 %><br>
+            <%= f.submit "投稿", class: "btn btn-outline-success mt-3" %>
           <% end %>
-
-
         </div>
     </div>
   </div>

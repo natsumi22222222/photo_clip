@@ -107,7 +107,6 @@ header{
 .container{
   margin-top: 100px;
   margin-bottom: 200px;
-
 }
 
 
@@ -153,6 +152,7 @@ header{
   margin: 0 auto;
   padding-bottom: 18px;
 }
+
 
 h1{
   padding-bottom: 30px;
@@ -200,7 +200,7 @@ h1{
 }
 
 h3{
-  padding-bottom: 55px;
+  padding-bottom: 45px;
 }
 
 .img-1,.img-15{
@@ -219,6 +219,10 @@ h3{
 
 .new-image{
   padding-bottom: 20px;
+}
+
+.genre-select{
+  outline-color: lightgray;
 }
 
 .post-image{
