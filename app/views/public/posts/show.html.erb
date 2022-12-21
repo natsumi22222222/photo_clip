@@ -7,6 +7,7 @@
       </div>
     </div>
   </div>
+
   <div class="row text-center mt-5">
     <div class= "col-12">
       <%= form_with model: [@post,@comment] do |f| %>
@@ -15,6 +16,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="row">
     <div class="col-12 show-border"></div>
       <p>コメント件数(全<%= @post.comments.count %>件)</p>
