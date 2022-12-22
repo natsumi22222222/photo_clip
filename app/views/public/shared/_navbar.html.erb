@@ -9,7 +9,7 @@
     <body>
       <header class= "fixed-top">
         <nav class="navbar navbar-light navbar-height">
-      <a href="#" class="navbar-brand text-secondary"><strong>PhotoClip</strong></a>
+      <a href="#" class="navbar-brand text-secondary ml-2"><strong>PhotoClip</strong></a>
        <div id="sp-menu">
       <h4>  -   M E N U   -  </h4>
       <% if user_signed_in? %>
@@ -28,10 +28,10 @@
         </li>
     　　<br>
         <li>
-          <a href="#">マップから探す</a>
+          <%= link_to "マップから探す", my_page_path %>
         </li>
         <li>
-          <a href="#">キーワードから探す</a>
+          <%= link_to "キーワードから探す", my_page_path %>
         </li>
         <li>
           <%= link_to "ジャンルから探す", genres_path %>
