@@ -4,11 +4,21 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  before_action :authenticate_user!
+  before_action :ensure_guest_user, only: [:edit]
+
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_one_attached :profile_image
+
+  def self.guest
+    find_or_create_by!(email: 'guest_signin328@gmail.com',name: 'guestuser') do |user|
+      user.password= SecureRandom.urlsafe_base64
+      user.name= "guestuser"
+    end
+  end
 
   def get_profile_image(width, height)
     unless profile_image.attached?
@@ -18,5 +28,10 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
-
+  def ensure_guest_user
+    @user= User.find(params[:id])
+    if @user.name == "guestuser"
+      redirect_to user_path(current_user), notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+    end
+  end
 end

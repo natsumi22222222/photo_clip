@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'user/sessions#guest_sign_in'
+  end
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: 'admin/sessions'
   }
@@ -24,7 +28,6 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    post '/homes/guest_sign_in', to: 'homes#new_guest'
     root to: 'homes#top'
     get 'about' => 'homes#about'
     resources :tags, only: [:create, :destroy, :edit, :update]
