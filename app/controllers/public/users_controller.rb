@@ -12,7 +12,7 @@ class Public::UsersController < ApplicationController
   def update
     @user= User.find(params[:id])
     if @user.update(user_params)
-      redirect_to my_page_path(@user.id)
+      redirect_to user_path(@user.id)
     else
       render :edit
     end
@@ -22,7 +22,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :introduction, :image)
+    params.require(:user).permit(:name, :introduction, :image, :profile_image)
   end
 
 end

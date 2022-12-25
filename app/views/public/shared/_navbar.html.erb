@@ -24,14 +24,14 @@
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </li>
         <li>
-          <%= link_to "マイページ", my_page_path %>
+          <%= link_to "マイページ", user_path(current_user.id) %>
         </li>
     　　<br>
         <li>
-          <%= link_to "マップから探す", my_page_path %>
+          <%= link_to "マップから探す" %>
         </li>
         <li>
-          <%= link_to "キーワードから探す", my_page_path %>
+          <%= link_to "キーワードから探す" %>
         </li>
         <li>
           <%= link_to "ジャンルから探す", genres_path %>

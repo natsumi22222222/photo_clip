@@ -4,9 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  before_action :authenticate_user!
-  before_action :ensure_guest_user, only: [:edit]
-
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -31,7 +28,7 @@ class User < ApplicationRecord
   def ensure_guest_user
     @user= User.find(params[:id])
     if @user.name == "guestuser"
-      redirect_to user_path(current_user), notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+      redirect_to user_path(current_user), notice: 'ゲストユーザーは編集画面へ遷移できません。'
     end
   end
 end

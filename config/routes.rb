@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    post 'users/guest_sign_in', to: 'user/sessions#guest_sign_in'
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
 
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -39,10 +39,8 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
     get "/posts/:id/exif" => "posts#exif", as: :exif
-    get "my_page" => "users#show"
-    get "my_page/edit" => "users#edit"
-    patch "my_page/:id" => "users#update"
-    resources :users, only:[:index, :show, :edit, :update]
+
+    resources :users, only:[:index,:show ,:edit ,:update]
 
   end
 
