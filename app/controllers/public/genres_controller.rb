@@ -20,4 +20,22 @@ class Public::GenresController < ApplicationController
     end
 
   end
+
+  def sports
+    if params[:genre_id].present?
+      @posts= Post.where(genre_id: params[:genre_id])
+    else
+      @posts= Post.all
+    end
+
+  end
+
+  def animal
+    if params[:genre_id].present?
+      @posts= Post.where(genre_id: params[:genre_id])
+    else
+      @posts= Post.all
+    end
+
+  end
 end

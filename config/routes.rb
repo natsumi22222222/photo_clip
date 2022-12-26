@@ -34,6 +34,19 @@ Rails.application.routes.draw do
     resources :genres, only:[:index, :show]
     get 'nature' => 'genres#nature'
     get 'sports' => 'genres#sports'
+    get 'animal' => 'genres#animal'
+    get 'sky' => 'genres#sky'
+    get 'fashion' => 'genres#fashion'
+    get 'meal' => 'genres#meal'
+    get 'night_view' => 'genres#night_view'
+    get 'military' => 'genres#military'
+    get 'art' => 'genres#art'
+    get 'architecture' => 'genres#architecture'
+    get 'portrait' => 'genres#portrait'
+    get 'bw' => 'genres#bw'
+    get 'vehicle' => 'genres#vehicle'
+    get 'wedding' => 'genres#wedding'
+    get 'other' => 'genres#other'
     resources :posts do
       resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create, :destroy]

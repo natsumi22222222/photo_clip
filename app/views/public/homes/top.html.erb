@@ -1,12 +1,9 @@
-
-
-
 <div class= "container text-center">
     <div class="swiper">
-      <div class="swiper-wrapper" style="width:100%">
+      <div class="swiper-wrapper">
         <% (1..5).each do |i| %>
           <div class="swiper-slide">
-            <%= image_tag("Genre#{i}.JPG") %>
+            <%= image_tag("Top#{i}.JPG") %>
           </div>
         <% end %>
       </div>
@@ -18,12 +15,12 @@
     </div>
     <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
   <div class= "row">
-    <div class= "col-12 text-center mt-2 mb-3">
+    <div class= "col-12 text-center mt-5 mb-3">
       <p>お気に入りの写真を探しに出かけよう</p>
     </div>
   </div>
 
-  <div class= "row text-center">
+  <div class= "row text-center mt-5">
       <div id= "display top-image"></div>
       <div id= 'top-map'></div>
         <!--<input type="text" id="address" class= "form-control" type="text" placeholder="Default input" aria-label="default input example">-->
@@ -34,7 +31,7 @@
           <input type= "text" id= "address" class= "form-control mb-3 top-form" type= "text" placeholder= "場所を入れてください" aria-label= "default input example">
         </div>
         <div class= "mx-3">
-          <input type= "button" id= "button" value= "マップから探す" onclick= "" class= "btn btn-md btn-primary mb-5 top-button">
+          <input type= "button" id= "button" value= "マップから探す" onclick= "" class= "btn btn-outline-info mb-5 top-button">
         </div>
       </form>
 
@@ -95,18 +92,22 @@
 
 <script>
   const swiper = new Swiper('.swiper', {
-    //オプションの設定
-    loop: true, //最後までスライドしたら最初の画像に戻る
-  
+    loop: true,
+
+    autoplay: {
+      delay: 3000,
+      stopOnLastSlide: false,
+      disableOnInteraction: true,
+      reverseDirection: false
+    },
     //ページネーション表示の設定
     pagination: {
-      el: '.swiper-pagination', //ページネーションの要素
+      el: '.swiper-pagination',
     },
-  
-    //ナビゲーションボタン（矢印）表示の設定
+
     navigation: {
-      nextEl: '.swiper-button-next', //「次へボタン」要素の指定
-      prevEl: '.swiper-button-prev', //「前へボタン」要素の指定
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     }
   });
 </script>

@@ -1,0 +1,7 @@
+<div class="container text-center">
+  <% @posts.each do |post| %>
+    <%= image_tag post.get_image %>
+    <%= post.title %>
+    <%= post.body %>
+  <% end %>
+</div>
