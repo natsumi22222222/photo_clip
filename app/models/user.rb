@@ -17,6 +17,13 @@ class User < ApplicationRecord
     end
   end
 
+  def ensure_guest_user
+    @user= User.find(params[:id])
+    if @user.name == "guestuser"
+      redirect_to user_path(current_user), notice: 'ゲストユーザーは編集画面へ遷移できません。'
+    end
+  end
+
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -33,10 +40,17 @@ class User < ApplicationRecord
       image
   end
 
-  def ensure_guest_user
-    @user= User.find(params[:id])
-    if @user.name == "guestuser"
-      redirect_to user_path(current_user), notice: 'ゲストユーザーは編集画面へ遷移できません。'
+  def self.looks(search,word)
+    if search == "perfect_match"
+      @user= User.where("name LIKE?","#{word}")
+    elsif search == "forward_march"
+      @user= User.where("name LIKE?","#{word}%")
+    elsif search == "backward_march"
+      @user= User.where("name LIKE?","%#{word}")
+    elsif search == "partial_march"
+      @user= User.where("name LIKE?","%#{word}%")
+    else
+      @user= User.all
     end
   end
 end

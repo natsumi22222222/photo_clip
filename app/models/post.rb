@@ -33,4 +33,17 @@ class Post < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
+  def self.looks(search,word)
+    if search == "perfect_match"
+      @post= Post.where("name LIKE?","#{word}")
+    elsif search == "forward_march"
+      @post= Post.where("name LIKE?","#{word}%")
+    elsif search == "backward_march"
+      @post= Post.where("name LIKE?","%#{word}")
+    elsif search == "partial_march"
+      @post= Post.where("name LIKE?","%#{word}%")
+    else
+      @post= Post.all
+    end
+  end
 end

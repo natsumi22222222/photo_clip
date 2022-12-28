@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get 'about' => 'homes#about'
     resources :tags, only: [:create, :destroy, :edit, :update]
     resources :genres, only:[:index, :show]
+
     get 'nature' => 'genres#nature'
     get 'sports' => 'genres#sports'
     get 'animal' => 'genres#animal'
@@ -47,10 +48,12 @@ Rails.application.routes.draw do
     get 'vehicle' => 'genres#vehicle'
     get 'wedding' => 'genres#wedding'
     get 'other' => 'genres#other'
+
     resources :posts do
       resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create, :destroy]
     end
+    get 'search' => 'posts#search'
     get "/posts/:id/exif" => "posts#exif", as: :exif
 
     resources :users, only:[:index,:show ,:edit ,:update]
