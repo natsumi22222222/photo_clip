@@ -1,7 +1,18 @@
 <div class="container text-center">
-  <% @posts.each do |post| %>
-    <%= image_tag post.get_image %>
-    <%= post.title %>
-    <%= post.body %>
-  <% end %>
+  <div class= "row">
+    <div class="col-12">
+      <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
+      <h3>動物の写真一覧</h3>
+    </div>
+  </div>
+  <div class= "row">
+    <div class="col-12">
+
+      <% @posts.each do |post| %>
+        <%= link_to post_path(post.id) do %>
+        <%= image_tag post.get_image, class: "post-image" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
