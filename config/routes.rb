@@ -21,18 +21,20 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :comments, only: [:index,:show, :destroy]
     resources :posts, only: [:index, :show, :edit, :destroy]
+
   end
 
   scope module: :admin do
-    get "admin" => "homes#top", as: :admin_top
+    get 'admin' => 'homes#top', as: :admin_top
   end
 
   scope module: :public do
     root to: 'homes#top'
-    get 'about' => 'homes#about'
     resources :tags, only: [:create, :destroy, :edit, :update]
     resources :genres, only:[:index, :show]
 
+    get 'about' => 'homes#about'
+    get 'map' => 'map#post'
     get 'nature' => 'genres#nature'
     get 'sports' => 'genres#sports'
     get 'animal' => 'genres#animal'
