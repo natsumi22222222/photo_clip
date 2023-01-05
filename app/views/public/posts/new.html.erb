@@ -17,68 +17,12 @@
           <div id="display">ここに緯度経度が表示されます</div>
 
           <div id='map'></div>
-          <script>
-            let map
 
-            const display = document.getElementById('display')
-
-            // mapの表示関数
-            function initMap() {
-                geocoder = new google.maps.Geocoder()
-                let marker;
-
-
-                // mapの初期位置, 縮尺を定義
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: {
-                        lat: 35.6458437,
-                        lng: 139.7046171
-                    },
-                    zoom: 12,
-                });
-
-                $('#button').on('click', (e)=> {
-                  let inputAddress = document.getElementById('address').value;
-                                     //=> $('#address').val();
-                  // 地図検索関数
-                  geocoder.geocode({
-                    'address': inputAddress
-                    }, function (results, status) {
-                      if (status == 'OK') {
-                          map.setCenter(results[0].geometry.location);
-
-                          if(marker != null){
-                            marker.setMap(null);
-                  　　　  　　}
-                            marker = new google.maps.Marker({
-                              map: map,
-                              position: results[0].geometry.location
-                          });
-
-
-                      display.textContent = "検索結果：" + results[0].geometry.location
-
-                      $('#post_latitude').val(results[0].geometry.location.lat());
-                      $('#post_longitude').val(results[0].geometry.location.lng());
-
-                      } else {
-                          alert('該当する結果がありませんでした：' + status);
-                      }
-                  });
-                })
-            }
-          </script>
-
-          <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
           <%= f.hidden_field :latitude %>
           <%= f.hidden_field :longitude %>
           <%= f.text_field :address, id: 'address', class: "mt-3" %>
           <input type= "button" id= "button" class= "btn btn-outline-primary" value="地図を検索" onclick="">
-    </div>
 
-  </div>
-  <div class="row">
-    <div class="col-12 text-center">
             <%= f.label "タグ登録", class: "mt-5" %>
             <%= f.text_field :name, placeholder: ",で区切ってください", class: "mb-3" %><br>
             <%= f.radio_button :release, '1', checked: "checked" %>
@@ -87,7 +31,61 @@
              <%= f.label :release, '非公開', value: 0 %><br>
             <%= f.submit "投稿", class: "btn btn-outline-success mt-3" %>
           <% end %>
-        </div>
+          </div>
+       <script>
+        let map
+
+        const display = document.getElementById('display')
+
+        // mapの表示関数
+        function initMap() {
+            geocoder = new google.maps.Geocoder()
+            let marker;
+
+
+            // mapの初期位置, 縮尺を定義
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 35.6458437,
+                    lng: 139.7046171
+                },
+                zoom: 12,
+            });
+
+            $('#button').on('click', (e)=> {
+              let inputAddress = document.getElementById('address').value;
+                                 //=> $('#address').val();
+              // 地図検索関数
+              geocoder.geocode({
+                'address': inputAddress
+                }, function (results, status) {
+                  if (status == 'OK') {
+                      map.setCenter(results[0].geometry.location);
+
+                      if(marker != null){
+                        marker.setMap(null);
+              　　　  　　}
+                        marker = new google.maps.Marker({
+                          map: map,
+                          position: results[0].geometry.location
+                      });
+
+
+                  display.textContent = "検索結果：" + results[0].geometry.location
+
+                  $('#post_latitude').val(results[0].geometry.location.lat());
+                  $('#post_longitude').val(results[0].geometry.location.lng());
+
+                  } else {
+                      alert('該当する結果がありませんでした：' + status);
+                  }
+              });
+            })
+        }
+      </script>
+
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
+
     </div>
   </div>
 </div>

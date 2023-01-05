@@ -1,0 +1,73 @@
+<div class= "container text-center">
+    <div class= "row text-center mt-5">
+      <div class= "col-12 mt-5 mb-3">
+        <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
+        <h3>マップから探す</h3>
+      </div>
+      <div id= "display top-image"></div>
+      <div id= 'top-map'></div>
+      <form class= "col-12 mt-3">
+        <div class= "mx-3">
+          <input type= "text" id= "address" class= "form-control mb-3 top-form" type= "text" placeholder= "場所を入れてください" aria-label= "default input example">
+        </div>
+        <div class= "mx-3">
+          <input type= "button" id= "button" value= "マップから探す" onclick= "" class= "btn btn-outline-info mb-5 top-button">
+        </div>
+      </form>
+
+      <script>
+        let map
+
+        const display = document.getElementById('display')
+
+        // mapの表示関数
+        function initMap() {
+            geocoder = new google.maps.Geocoder()
+            let marker;
+
+
+            // mapの初期位置, 縮尺を定義
+            map = new google.maps.Map(document.getElementById('top-map'), {
+                center: {
+                    lat: 35.6458437,
+                    lng: 139.7046171
+                },
+                zoom: 12,
+            });
+
+            $('#button').on('click', (e)=> {
+              let inputAddress = document.getElementById('address').value;
+
+              // 地図検索関数
+              geocoder.geocode({
+                'address': inputAddress
+                }, function (results, status) {
+                  if (status == 'OK') {
+                      map.setCenter(results[0].geometry.location);
+
+                      if(marker != null){
+                        marker.setMap(null);
+              　　　  　　}
+                        marker = new google.maps.Marker({
+                          map: map,
+                          position: results[0].geometry.location
+                      });
+
+
+                  display.textContent = "検索結果：" + results[0].geometry.location
+
+
+                  } else {
+                      alert('該当する結果がありませんでした：' + status);
+                  }
+              });
+            })
+        }
+      </script>
+
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
+    </div>
+  </div>
+</div>
+  </div>
+</div>

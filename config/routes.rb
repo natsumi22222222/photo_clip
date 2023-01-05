@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     resources :genres, only:[:index, :show]
 
     get 'about' => 'homes#about'
-    get 'map' => 'map#post'
+    get 'map' => 'posts#map'
     get 'nature' => 'genres#nature'
     get 'sports' => 'genres#sports'
     get 'animal' => 'genres#animal'
@@ -56,6 +56,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
     get 'search' => 'posts#search'
+    get 'spot_search' => 'posts#spot_search'
     get "/posts/:id/exif" => "posts#exif", as: :exif
 
     resources :users, only:[:index,:show ,:edit ,:update]

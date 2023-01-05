@@ -7,13 +7,12 @@
           </div>
         <% end %>
       </div>
-      <!-- ページネーションの要素 -->
       <div class="swiper-pagination"></div>
-      <!-- ナビゲーションボタン （前、次） -->
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </div>
-    <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
+
+  <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
   <div class= "row">
     <div class= "col-12 text-center mt-5 mb-3">
       <p>お気に入りの写真を探しに出かけよう</p>
@@ -21,93 +20,86 @@
   </div>
 
   <div class= "row text-center mt-5">
-      <div id= "display top-image"></div>
-      <div id= 'top-map'></div>
-        <!--<input type="text" id="address" class= "form-control" type="text" placeholder="Default input" aria-label="default input example">-->
-        <!--<input type="button" id="button" value="マップから写真を探す" onclick="" class= "btn btn-primary">-->
+    <div id= "display top-image"></div>
+    <div id='map'></div>
 
-      <form class= "col-12 mt-3">
-        <div class= "mx-3">
-          <input type= "text" id= "address" class= "form-control mb-3 top-form" type= "text" placeholder= "場所を入れてください" aria-label= "default input example">
-        </div>
-        <div class= "mx-3">
-          <input type= "button" id= "button" value= "マップから探す" onclick= "" class= "btn btn-outline-info mb-5 top-button">
-        </div>
-      </form>
-
-      <script>
-        let map
-
-        const display = document.getElementById('display')
-
-        // mapの表示関数
-        function initMap() {
-            geocoder = new google.maps.Geocoder()
-            let marker;
+    <%= form_with local: true,url: root_path,method: :get do |f| %>
+	    <%= f.text_field :content %>
+	    <%= f.submit '検索', class:"btn btn-primary" %>
+    <% end %>
 
 
-            // mapの初期位置, 縮尺を定義
-            map = new google.maps.Map(document.getElementById('top-map'), {
-                center: {
-                    lat: 35.6458437,
-                    lng: 139.7046171
-                },
-                zoom: 12,
-            });
+  <script>
+  let map;
+  let marker = [];
+  let infoWindow = [];
+  let markerData = [ // マーカーを立てる場所名・緯度・経度
+  <% @posts.each do |post| %>
 
-            $('#button').on('click', (e)=> {
-              let inputAddress = document.getElementById('address').value;
+   {
+    name: '<%= post.address %>',
+    lat: <%= post.latitude.to_f %>,
+    lng: <%= post.longitude.to_f %>
+   },
+  <% end %>
+  ];
 
-              // 地図検索関数
-              geocoder.geocode({
-                'address': inputAddress
-                }, function (results, status) {
-                  if (status == 'OK') {
-                      map.setCenter(results[0].geometry.location);
+  function initMap() {
+   // 地図の作成
+      var mapLatLng = new google.maps.LatLng({lat: markerData[0]['lat'], lng: markerData[0]['lng']}); // 緯度経度のデータ作成
+     map = new google.maps.Map(document.getElementById('map'), { // #sampleに地図を埋め込む
+       center: mapLatLng, // 地図の中心を指定
+        zoom: 14 // 地図のズームを指定
+     });
 
-                      if(marker != null){
-                        marker.setMap(null);
-              　　　  　　}
-                        marker = new google.maps.Marker({
-                          map: map,
-                          position: results[0].geometry.location
-                      });
+   // マーカー毎の処理
+   for (let i = 0; i < markerData.length; i++) {
+          markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']}); // 緯度経度のデータ作成
+          marker[i] = new google.maps.Marker({ // マーカーの追加
+           position: markerLatLng, // マーカーを立てる位置を指定
+              map: map // マーカーを立てる地図を指定
+         });
 
+       infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+           content: '<div class="map">' + markerData[i]['name'] + '</div>' // 吹き出しに表示する内容
+         });
 
-                  display.textContent = "検索結果：" + results[0].geometry.location
+       markerEvent(i); // マーカーにクリックイベントを追加
+   }
+  }
 
+  // マーカーにクリックイベントを追加
+  function markerEvent(i) {
+      marker[i].addListener('click', function() { // マーカーをクリックしたとき
+        infoWindow[i].open(map, marker[i]); // 吹き出しの表示
+    });
+  }
 
-                  } else {
-                      alert('該当する結果がありませんでした：' + status);
-                  }
-              });
-            })
-        }
       </script>
 
-      <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  const swiper = new Swiper('.swiper', {
-    loop: true,
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
 
-    autoplay: {
-      delay: 3000,
-      stopOnLastSlide: false,
-      disableOnInteraction: true,
-      reverseDirection: false
-    },
-    //ページネーション表示の設定
-    pagination: {
-      el: '.swiper-pagination',
-    },
+      autoplay: {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: true,
+        reverseDirection: false
+      },
+      //ページネーション表示の設定
+      pagination: {
+        el: '.swiper-pagination',
+      },
 
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    }
-  });
-</script>
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    });
+  </script>
