@@ -4,70 +4,67 @@
         <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
         <h3>マップから探す</h3>
       </div>
+    </div>
+    <div class= "row text-center mt-5">
       <div id= "display top-image"></div>
-      <div id= 'top-map'></div>
-      <form class= "col-12 mt-3">
-        <div class= "mx-3">
-          <input type= "text" id= "address" class= "form-control mb-3 top-form" type= "text" placeholder= "場所を入れてください" aria-label= "default input example">
-        </div>
-        <div class= "mx-3">
-          <input type= "button" id= "button" value= "マップから探す" onclick= "" class= "btn btn-outline-info mb-5 top-button">
-        </div>
-      </form>
+      <div id='map'></div>
+
+      <%= form_with local: true,url: root_path,method: :get do |f| %>
+  	    <%= f.text_field :content %>
+  	    <%= f.submit '検索', class: "btn btn-primary" %>
+      <% end %>
+
 
       <script>
-        let map
+        let map;
+        let marker = [];
+        let infoWindow = [];
+        let markerData = [ // マーカーを立てる場所名・緯度・経度
+        <% @posts.each do |post| %>
 
-        const display = document.getElementById('display')
+         {
+          name: '<%= post.address %>',
+          lat: <%= post.latitude.to_f %>,
+          lng: <%= post.longitude.to_f %>
+         },
+        <% end %>
+        ];
 
-        // mapの表示関数
         function initMap() {
-            geocoder = new google.maps.Geocoder()
-            let marker;
+         // 地図の作成
+            let mapLatLng = new google.maps.LatLng({lat: markerData[0]['lat'], lng: markerData[0]['lng']}); // 緯度経度のデータ作成
+           map = new google.maps.Map(document.getElementById('map'), {
+             center: mapLatLng, // 地図の中心を指定
+              zoom: 14 // 地図のズーム
+           });
 
+             // マーカー毎の処理
+             for (let i = 0; i < markerData.length; i++) {
+                markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']}); // 緯度経度のデータ作成
+                marker[i] = new google.maps.Marker({ // マーカーの追加
+                 position: markerLatLng, // マーカーを立てる位置を指定
+                    map: map // マーカーを立てる地図を指定
+               });
 
-            // mapの初期位置, 縮尺を定義
-            map = new google.maps.Map(document.getElementById('top-map'), {
-                center: {
-                    lat: 35.6458437,
-                    lng: 139.7046171
-                },
-                zoom: 12,
-            });
+             infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+                 content: '<div class="map">' + markerData[i]['name'] + '</div>' // 吹き出しに表示する内容
+               });
 
-            $('#button').on('click', (e)=> {
-              let inputAddress = document.getElementById('address').value;
-
-              // 地図検索関数
-              geocoder.geocode({
-                'address': inputAddress
-                }, function (results, status) {
-                  if (status == 'OK') {
-                      map.setCenter(results[0].geometry.location);
-
-                      if(marker != null){
-                        marker.setMap(null);
-              　　　  　　}
-                        marker = new google.maps.Marker({
-                          map: map,
-                          position: results[0].geometry.location
-                      });
-
-
-                  display.textContent = "検索結果：" + results[0].geometry.location
-
-
-                  } else {
-                      alert('該当する結果がありませんでした：' + status);
-                  }
-              });
-            })
+             markerEvent(i); // マーカーにクリックイベントを追加
+         }
         }
+
+        // マーカーにクリックイベントを追加
+        function markerEvent(i) {
+            marker[i].addListener('click', function() { // マーカーをクリックしたとき
+              infoWindow[i].open(map, marker[i]); // 吹き出しの表示
+          });
+        }
+
       </script>
 
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
     </div>
   </div>
-</div>
   </div>
 </div>

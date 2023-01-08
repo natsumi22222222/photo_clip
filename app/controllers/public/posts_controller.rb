@@ -26,10 +26,20 @@ class Public::PostsController < ApplicationController
     @post= Post.find(params[:id])
     @comment= Comment.new
   end
-  
+
 
   def exif
     @post= Post.find(params[:id])
+  end
+
+  def map
+    if params[:content]
+      @post =  Post.where("address LIKE(?) or title LIKE(?)","%#{params[:content]}%","%#{params[:content]}%").last
+      @posts = Post.where(latitude: (@post.latitude - 0.1)..(@post.latitude + 0.1),longitude: (@post.longitude - 0.1)..(@post.longitude + 0.1))
+    else
+      @posts = Post.all
+    end
+
   end
 
   private
