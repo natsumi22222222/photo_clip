@@ -1,70 +1,73 @@
 <div class= "container text-center">
-    <div class= "row text-center mt-5">
-      <div class= "col-12 mt-5 mb-3">
-        <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
-        <h3>マップから探す</h3>
-      </div>
+  <div class= "row text-center mt-5">
+    <div class= "col-12 mt-3">
+      <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
+      <h3>マップから探す</h3>
     </div>
-    <div class= "row text-center mt-5">
+  </div>
+
+  <div class= "row text-center mt-5">
+    <div class="col-12">
       <div id= "display top-image"></div>
       <div id='map'></div>
+    </div>
+  </div>
 
+  <div class= "row text-center mt-5">
+    <div class="col-12">
       <%= form_with local: true,url: root_path,method: :get do |f| %>
   	    <%= f.text_field :content %>
   	    <%= f.submit '検索', class: "btn btn-primary" %>
       <% end %>
-
-
-      <script>
-        let map;
-        let marker = [];
-        let infoWindow = [];
-        let markerData = [ // マーカーを立てる場所名・緯度・経度
-        <% @posts.each do |post| %>
-
-         {
-          name: '<%= post.address %>',
-          lat: <%= post.latitude.to_f %>,
-          lng: <%= post.longitude.to_f %>
-         },
-        <% end %>
-        ];
-
-        function initMap() {
-         // 地図の作成
-            let mapLatLng = new google.maps.LatLng({lat: markerData[0]['lat'], lng: markerData[0]['lng']}); // 緯度経度のデータ作成
-           map = new google.maps.Map(document.getElementById('map'), {
-             center: mapLatLng, // 地図の中心を指定
-              zoom: 14 // 地図のズーム
-           });
-
-             // マーカー毎の処理
-             for (let i = 0; i < markerData.length; i++) {
-                markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']}); // 緯度経度のデータ作成
-                marker[i] = new google.maps.Marker({ // マーカーの追加
-                 position: markerLatLng, // マーカーを立てる位置を指定
-                    map: map // マーカーを立てる地図を指定
-               });
-
-             infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
-                 content: '<div class="map">' + markerData[i]['name'] + '</div>' // 吹き出しに表示する内容
-               });
-
-             markerEvent(i); // マーカーにクリックイベントを追加
-         }
-        }
-
-        // マーカーにクリックイベントを追加
-        function markerEvent(i) {
-            marker[i].addListener('click', function() { // マーカーをクリックしたとき
-              infoWindow[i].open(map, marker[i]); // 吹き出しの表示
-          });
-        }
-
-      </script>
-
-      <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
     </div>
   </div>
-  </div>
-</div>
+
+    <script>
+      let map;
+      let marker = [];
+      let infoWindow = [];
+      let markerData = [ // マーカーを立てる場所名・緯度・経度
+      <% @posts.each do |post| %>
+
+       {
+        name: '<%= post.address %>',
+        lat: <%= post.latitude.to_f %>,
+        lng: <%= post.longitude.to_f %>
+       },
+      <% end %>
+      ];
+
+      function initMap() {
+       // 地図の作成
+          let mapLatLng = new google.maps.LatLng({lat: markerData[0]['lat'], lng: markerData[0]['lng']}); // 緯度経度のデータ作成
+         map = new google.maps.Map(document.getElementById('map'), {
+           center: mapLatLng, // 地図の中心を指定
+            zoom: 14 // 地図のズーム
+         });
+
+           // マーカー毎の処理
+           for (let i = 0; i < markerData.length; i++) {
+              markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']}); // 緯度経度のデータ作成
+              marker[i] = new google.maps.Marker({ // マーカーの追加
+               position: markerLatLng, // マーカーを立てる位置を指定
+                  map: map // マーカーを立てる地図を指定
+             });
+
+           infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+               content: '<div class="map">' + markerData[i]['name'] + '</div>' // 吹き出しに表示する内容
+             });
+
+           markerEvent(i); // マーカーにクリックイベントを追加
+       }
+      }
+
+      // マーカーにクリックイベントを追加
+      function markerEvent(i) {
+          marker[i].addListener('click', function() { // マーカーをクリックしたとき
+            infoWindow[i].open(map, marker[i]); // 吹き出しの表示
+        });
+      }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>

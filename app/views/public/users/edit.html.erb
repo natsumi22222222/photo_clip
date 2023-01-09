@@ -1,20 +1,21 @@
 <div class="container text-center">
-  <div class="row ">
+  <div class="row">
     <div class="col-12">
+      <% if flash[:notice]%>
+        <p id= "notice">
+      <%= flash[:notice] %>
+       </p>
+      <% end %>
       <img src= '/assets/marker.jpeg' alt= "" class= "marker-image">
       <h4>マイページ編集</h4>
       <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
-
-      <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %><br>
-      <%= f.label "ユーザー名", class: "mt-3" %>
-      <%= f.text_field :name %><br>
-
-      <%= f.label "自己紹介" %>
-      <%= f.text_area :introduction, class: "mt-3" %><br>
-
-      <%= f.submit "保存する", class: "btn btn btn-outline-success mt-3" %>
-
-    <% end %>
+        <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %><br>
+        <%= f.label "ユーザー名", class: "mt-3" %>
+        <%= f.text_field :name %><br>
+        <%= f.label "自己紹介" %>
+        <%= f.text_area :introduction, class: "mt-3" %><br>
+        <%= f.submit "保存する", class: "btn btn btn-outline-success mt-3" %>
+      <% end %>
 
     </div>
   </div>

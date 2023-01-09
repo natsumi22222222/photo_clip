@@ -1,6 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center">
+      <% if flash[:notice]%>
+     <p id= "notice">
+       <%= flash[:notice] %>
+     </p>
+    <% end %>
       <img src= '/assets/marker.jpeg' alt= "" class= "marker-image">
       <h3 class= "section-ttl">写真投稿ページ</h3>
         <%= form_with model: @post, local: true, url: posts_path do |f| %>

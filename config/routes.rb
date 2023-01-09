@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
+    resources :users, only:[:index,:show, :edit, :update]
     resources :tags, only: [:create, :destroy, :edit, :update]
     resources :genres, only:[:index, :show]
 
@@ -59,7 +60,6 @@ Rails.application.routes.draw do
     get 'spot_search' => 'posts#spot_search'
     get "/posts/:id/exif" => "posts#exif", as: :exif
 
-    resources :users, only:[:index,:show ,:edit ,:update]
 
   end
 

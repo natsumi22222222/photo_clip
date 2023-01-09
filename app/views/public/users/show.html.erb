@@ -21,7 +21,9 @@
 
   <div class="row text-center">
     <div class="col-12">
-      <%= link_to "編集する", edit_user_path, class: "btn btn-outline-success mr-5 mt-5" %>
+      <% if @user.name != "guestuser" %>
+        <%= link_to "編集する", edit_user_path, class: "btn btn-outline-success mr-5 mt-5" %>
+      <% end %>
       <%= link_to "投稿一覧を見る", posts_path, class: "btn btn-outline-warning mt-5" %>
     </div>
   </div>

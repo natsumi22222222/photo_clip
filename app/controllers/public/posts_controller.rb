@@ -10,6 +10,7 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     tag_list= params[:post][:name].split(',')
     if @post.save!
+       flash[:notice]= '投稿が完了しました！'
       @post.tags_save(tag_list)
       redirect_to posts_path
     else

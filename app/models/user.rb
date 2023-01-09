@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_one_attached :profile_image
 
+  validates :name,presence: true , uniqueness: true , length: { in: 2..20}
+  validates :introduction, length: {maximum: 50}
+
   def self.guest
     find_or_create_by!(email: 'guest_signin328@gmail.com',name: 'guestuser') do |user|
       user.password= SecureRandom.urlsafe_base64
@@ -40,17 +43,5 @@ class User < ApplicationRecord
       image
   end
 
-  def self.looks(search,word)
-    if search == "perfect_match"
-      @user= User.where("name LIKE?","#{word}")
-    elsif search == "forward_march"
-      @user= User.where("name LIKE?","#{word}%")
-    elsif search == "backward_march"
-      @user= User.where("name LIKE?","%#{word}")
-    elsif search == "partial_march"
-      @user= User.where("name LIKE?","%#{word}%")
-    else
-      @user= User.all
-    end
-  end
+
 end
