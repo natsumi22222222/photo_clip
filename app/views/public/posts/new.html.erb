@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-12 text-center">
       <% if flash[:notice]%>
-     <p id= "notice">
-       <%= flash[:notice] %>
-     </p>
-    <% end %>
+        <p id= "notice">
+      <%= flash[:notice] %>
+        </p>
+      <% end %>
       <img src= '/assets/marker.jpeg' alt= "" class= "marker-image">
       <h3 class= "section-ttl">写真投稿ページ</h3>
         <%= form_with model: @post, local: true, url: posts_path do |f| %>
@@ -18,9 +18,7 @@
           <%= f.label "ジャンル" %>
           <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), id: "genre-select" %><br>
 
-
           <div id="display">ここに緯度経度が表示されます</div>
-
           <div id='map'></div>
 
           <%= f.hidden_field :latitude %>
@@ -28,16 +26,16 @@
           <%= f.text_field :address, id: 'address', class: "mt-3" %>
           <input type= "button" id= "button" class= "btn btn-outline-primary" value="地図を検索" onclick="">
 
-            <%= f.label "タグ登録", class: "mt-5" %>
-            <%= f.text_field :name, placeholder: ",で区切ってください", class: "mb-3" %><br>
-            <%= f.radio_button :release, '1', checked: "checked" %>
-            <%= f.label :release, '公開', value: 1 %>
-             <%= f.radio_button :release, '0' %>
-             <%= f.label :release, '非公開', value: 0 %><br>
-            <%= f.submit "投稿", class: "btn btn-outline-success mt-3" %>
-          <% end %>
-          </div>
-       <script>
+          <%= f.label "タグ登録", class: "mt-5" %>
+          <%= f.text_field :name, placeholder: ",で区切ってください", class: "mb-3" %><br>
+          <%= f.radio_button :release, '1', checked: "checked" %>
+          <%= f.label :release, '公開', value: 1 %>
+          <%= f.radio_button :release, '0' %>
+          <%= f.label :release, '非公開', value: 0 %><br>
+          <%= f.submit "投稿", class: "btn btn-outline-success mt-3" %>
+        <% end %>
+        </div>
+      <script>
         let map
 
         const display = document.getElementById('display')
@@ -46,7 +44,6 @@
         function initMap() {
             geocoder = new google.maps.Geocoder()
             let marker;
-
 
             // mapの初期位置, 縮尺を定義
             map = new google.maps.Map(document.getElementById('map'), {
@@ -88,9 +85,7 @@
             })
         }
       </script>
-
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
-
     </div>
   </div>
 </div>
