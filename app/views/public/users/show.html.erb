@@ -4,6 +4,7 @@
       <img src= '/assets/marker.jpeg' alt= "" class= "marker-image">
     </div>
   </div>
+
   <h3 class= "text-center">マイページ</h3>
     <div class="row">
       <div class="col-md-4">
@@ -23,7 +24,7 @@
     <div class="col-12">
       <% if @user.name != "guestuser" %>
         <%= link_to "編集する", edit_user_path, class: "btn btn-outline-success mr-5 mt-5" %>
-        <%= link_to "投稿一覧を見る", posts_path, class: "btn btn-outline-warning mt-5" %>
+        <%= link_to "自分の投稿一覧を見る", user_post_path(@user.id), class: "btn btn-outline-warning mt-5" %>
       <% end %>
     </div>
   </div>

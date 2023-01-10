@@ -10,8 +10,6 @@ class Public::HomesController < ApplicationController
     else
       @posts = Post.all
     end
-
-
   end
 
   def about

@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_one_attached :profile_image
 
-  validates :name,presence: true , uniqueness: true , length: { in: 2..20}
+  validates :name, presence: true , uniqueness: true , length: { in: 2..20}
   validates :introduction, length: {maximum: 50}
 
   def self.guest
@@ -42,6 +42,4 @@ class User < ApplicationRecord
     end
       image
   end
-
-
 end

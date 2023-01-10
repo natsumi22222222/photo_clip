@@ -23,9 +23,37 @@ class Public::PostsController < ApplicationController
     @posts_page= Post.all.page(params[:page]).per(15)
   end
 
+  def user_post
+     @posts = Post.where(user_id: params[:user_id])
+  end
+
+  def search
+    if params[:keyword].present?
+      @posts = Post.where("title LIKE ? or body LIKE(?)","%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @posts = Post.all
+    end
+  end
+
   def show
     @post= Post.find(params[:id])
     @comment= Comment.new
+    if params[:tag_ids]
+      @posts = []
+      params[tag_ids].each do |key, value|
+        @posts += Tag.find_by(name: key).posts if value == "1"
+      end
+    end
+    if params[:tag_ids]
+      @posts = []
+      params[:tag_ids].each do |key, value|
+        if value == "1"
+          post_tags = Tag.find_by(name: key).posts
+          @posts = @posts.empty? ? post_tags : @posts & post_tags
+        end
+      end
+    end
   end
 
 

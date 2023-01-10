@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     get 'search' => 'posts#search'
     get 'spot_search' => 'posts#spot_search'
     get "/posts/:id/exif" => "posts#exif", as: :exif
+    get '/post/user_post/:user_id' => 'posts#user_post', as: 'user_post'
 
 
   end

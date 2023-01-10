@@ -87,22 +87,10 @@ ActiveRecord::Schema.define(version: 2022_11_16_110014) do
     t.integer "genre_id", null: false
     t.string "title", null: false
     t.text "body", null: false
-    t.integer "release"
+    t.integer "release", null: false
     t.float "latitude", null: false
     t.float "longitude", null: false
-    t.string "address"
-    t.string "camera_maker"
-    t.string "camera_model"
-    t.string "lens"
-    t.datetime "shooting_time"
-    t.string "image_size"
-    t.string "iso_speed"
-    t.string "focal_length"
-    t.float "exposure"
-    t.float "shutter_speed"
-    t.string "aperture"
-    t.string "software"
-    t.string "extension"
+    t.string "address", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

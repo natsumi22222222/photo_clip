@@ -6,22 +6,10 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.integer :genre_id,   null: false
       t.string :title,    null: false
       t.text :body,    null: false
-      t.integer :release
-      t.float :latitude,        null: false
-      t.float :longitude,        null: false
-      t.string :address
-      t.string :camera_maker
-      t.string :camera_model
-      t.string :lens
-      t.datetime :shooting_time
-      t.string :image_size
-      t.string :iso_speed
-      t.string :focal_length
-      t.float :exposure
-      t.float :shutter_speed
-      t.string :aperture
-      t.string :software
-      t.string :extension
+      t.integer :release,   null: false
+      t.float :latitude,    null: false
+      t.float :longitude,   null: false
+      t.string :address,   null: false
 
       t.timestamps
     end
