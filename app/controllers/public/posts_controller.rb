@@ -24,15 +24,23 @@ class Public::PostsController < ApplicationController
   end
 
   def user_post
-     @posts = Post.where(user_id: params[:user_id])
+     @posts= Post.where(user_id: params[:user_id])
   end
 
   def search
-    if params[:keyword].present?
-      @posts = Post.where("title LIKE ? or body LIKE(?)","%#{params[:keyword]}%")
-      @keyword = params[:keyword]
+    @keywords = params[:keywords].split(/[[:blank:]]+/)
+    @type = params[:type]
+    @results = Post.none
+
+    if @type == 'AND'
+      @keywords.each_with_index do |keyword, i|
+        @results = Post.search(keyword) if i == 0
+        @results = @results.merge(@results.search(keyword))
+      end
     else
-      @posts = Post.all
+      @keywords.each do |keyword|
+        @results = @results.or(Post.search(keyword))
+      end
     end
   end
 
@@ -40,7 +48,7 @@ class Public::PostsController < ApplicationController
     @post= Post.find(params[:id])
     @comment= Comment.new
     if params[:tag_ids]
-      @posts = []
+      @posts= []
       params[tag_ids].each do |key, value|
         @posts += Tag.find_by(name: key).posts if value == "1"
       end

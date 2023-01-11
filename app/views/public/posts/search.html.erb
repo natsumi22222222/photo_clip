@@ -1,0 +1,17 @@
+<%= form_with url: search_path, method: :get, local: true do |f| %>
+  <%= label_tag :keywords, '検索ワード' %>
+  <%= text_field_tag :keywords, params[:keywords] %>
+  <%= select_tag('type', options_for_select([%w[AND AND], %w[OR OR]], { :selected => params[:type] })) %>
+  <%= f.submit "検索" %>
+<% end %>
+
+
+<% if @results %>
+  <%= @keywords %> Search Result ( <%= @type %> )-->
+  <% @results.each do |result| %>
+    <p>
+      <%= result.title %><br>
+      <%= result.body %>
+    </p>
+  <% end %>
+<% end %>
