@@ -28,20 +28,28 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    @keywords= params[:keywords].split(/[[:blank:]]+/)
-    @type= params[:type]
-    @results= Post.none
-
-    if @type == 'AND'
-      @keywords.each_with_index do |keyword, i|
-        @results= Post.search(keyword) if i == 0
-        @results= @results.merge(@results.search(keyword))
-      end
-    else
-      @keywords.each do |keyword|
-        @results= @results.or(Post.search(keyword))
+    if params[:keywords].present?
+      @keywords= params[:keywords].split(/[[:blank:]]+/)
+      @type= params[:type]
+      @results= Post.none
+      if @type == 'AND'
+        @keywords.each_with_index do |keyword, i|
+          @results= Post.search(keyword) if i == 0
+          @results= @results.merge(@results.search(keyword))
+        end
+      else
+        @keywords.each do |keyword|
+          @results= @results.or(Post.search(keyword))
+        end
       end
     end
+    # if params[:tag_ids].present?
+    #   @results= Post.none
+    #   params[:tag_ids].each do |key, value|
+    #     @posts += Tag.find_by(name: key).posts if value == "1"
+    #   end
+    # @post.distinct!
+    # end
   end
 
   def show

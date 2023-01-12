@@ -1,17 +1,29 @@
-<%= form_with url: search_path, method: :get, local: true do |f| %>
-  <%= label_tag :keywords, '検索ワード' %>
-  <%= text_field_tag :keywords, params[:keywords] %>
-  <%= select_tag('type', options_for_select([%w[AND AND], %w[OR OR]], { :selected => params[:type] })) %>
-  <%= f.submit "検索" %>
-<% end %>
-
-
-<% if @results %>
-  <%= @keywords %> Search Result ( <%= @type %> )-->
-  <% @results.each do |result| %>
-    <p>
-      <%= result.title %><br>
-      <%= result.body %>
-    </p>
-  <% end %>
-<% end %>
+<div class="container text-center">
+  <div class="row mb-3">
+    <div class="col-12">
+      <%= form_with url: search_path, method: :get, local: true do |f| %>
+        <%= label_tag :keywords, '検索ワード' %>
+        <%= text_field_tag :keywords, params[:keywords] %>
+        <%= select_tag('type', options_for_select([%w[AND AND], %w[OR OR]], { :selected => params[:type] })) %>
+        <%= f.submit "検索", class: "btn btn-outline-primary"%>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <% if @results.nil? %>
+        <p>検索キーワードを入力して下さい。</p>
+      <% elsif @results.count > 0 %>
+        <%= @keywords %> Search Result ( <%= @type %> )-->
+        <% @results.each do |result| %>
+          <p>
+            <%= link_to result.title %><br>
+            <%= result.body %>
+          </p>
+        <% end %>
+      <% elsif  @results.count == 0 %>
+        <p>検索結果はありません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>
