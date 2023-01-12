@@ -2,16 +2,21 @@
   <div class="row text-center">
     <div class= "col-12">
       <%= image_tag @post.get_image, class: "show-image" %>
-
     </div>
   </div>
   <div class="row text-center">
     <div class= "col-12 mt-3 mb-5">
       <%= @post.user.name %>さんの投稿
-      <% @post.tags.each do |tag| %>
-        <span><%= tag.name %></span>
-      <% end %>
+      <p class= "title mt-5">タイトル: <%= @post.title %></p>
+      <p>説明: <%= @post.body %></p>
+      <p>
+        タグ:
+        <% @post.tags.each do |tag| %>
+          <span><%= tag.name %></span>
+        <% end %>
     </div>
+      </p>
+
   </div>
   <div class="row text-center">
     <div class= "col-12">

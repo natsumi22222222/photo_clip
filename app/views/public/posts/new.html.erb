@@ -5,11 +5,12 @@
       <h3 class= "section-ttl">写真投稿ページ</h3>
         <%= form_with model: @post, local: true, url: posts_path do |f| %>
 
-          <%= f.file_field :image, accept: "image/*", class: "mb-3" %><br>
+          <%= render 'public/shared/error_messages', model: f.object %>
+          <%= f.file_field :image, accept: "image/*", class: "mb-3", required: true %><br>
           <%= f.label "タイトル" %>
-          <%= f.text_field :title %><br>
+          <%= f.text_field :title, required: true %><br>
           <%= f.label "説明" %>
-          <%= f.text_area :body %><br>
+          <%= f.text_area :body, required: true %><br>
           <%= f.label "ジャンル" %>
           <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), id: "genre-select" %><br>
 
@@ -18,7 +19,7 @@
 
           <%= f.hidden_field :latitude %>
           <%= f.hidden_field :longitude %>
-          <%= f.text_field :address, id: 'address', class: "mt-3" %>
+          <%= f.text_field :address, id: 'address', class: "mt-3", required: true %>
           <input type= "button" id= "button" class= "btn btn-outline-primary" value="地図を検索" onclick=""><br>
 
           <%= f.label "タグ登録", class: "mt-5" %>

@@ -39,11 +39,11 @@
   <script>
     let map;
     let marker = [];
-    let infoWindow = [];
+    let infoWindow = []
     let markerData = [ // マーカーを立てる場所名・緯度・経度
     <% @posts.each do |post| %>
-
      {
+      id: '<%= post.id %>',
       name: '<%= post.address %>',
       lat: <%= post.latitude.to_f %>,
       lng: <%= post.longitude.to_f %>
@@ -59,6 +59,8 @@
           zoom: 14 // 地図のズームを指定
        });
 
+
+
      // マーカー毎の処理
      for (let i = 0; i < markerData.length; i++) {
             markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']}); // 緯度経度のデータ作成
@@ -70,7 +72,6 @@
          infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
              content: '<div class="map">' + markerData[i]['name'] + '</div>' // 吹き出しに表示する内容
            });
-
          markerEvent(i); // マーカーにクリックイベントを追加
      }
     }
@@ -78,7 +79,8 @@
     // マーカーにクリックイベントを追加
     function markerEvent(i) {
         marker[i].addListener('click', function() { // マーカーをクリックしたとき
-          infoWindow[i].open(map, marker[i]); // 吹き出しの表示
+
+         location.href = "https://1de328cb2cc7470aba2d89d1e334755a.vfs.cloud9.ap-northeast-1.amazonaws.com/posts/" + markerData[i]["id"]
       });
     }
 
