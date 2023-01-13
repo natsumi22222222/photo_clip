@@ -1,6 +1,12 @@
-<h1>管理者画面</h1>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-12">
+      <h1>管理者画面</h1>
+      <%= link_to "投稿管理", admin_posts_path, class: "btn btn-lg btn-outline-primary" %>
+      <%= link_to "ユーザー管理", admin_users_path, class: "btn btn-lg btn-outline-primary" %>
+      <%= link_to "コメント管理", admin_comments_path, class: "btn btn-lg btn-outline-primary" %>
+      <%= link_to "タグ管理", admin_tags_path, class: "btn btn-lg btn-outline-primary" %>
 
-<%= link_to "投稿管理", admin_posts_path %>
-<%= link_to "ユーザー管理", admin_users_path %>
-<%= link_to "コメント管理", admin_comments_path %>
-<%= link_to "タグ管理", admin_tags_path %>
+    </div>
+  </div>
+</div>

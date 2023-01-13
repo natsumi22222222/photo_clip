@@ -23,3 +23,8 @@ Genre.create([
     { name: '白黒'},
     { name: 'その他'},
     ])
+
+    Admin.create!(
+    email: 'PhotoCliptesttest@test.com',
+    password: 'testPhotoCliptest',
+)

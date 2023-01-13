@@ -12,7 +12,17 @@
       <a href="#" class="navbar-brand text-secondary ml-2"><strong>PhotoClip</strong></a>
        <div id="sp-menu">
       <h4>  -   M E N U   -  </h4>
-      <% if user_signed_in? %>
+      <% if admin_signed_in? %>
+        <li>
+          <%= link_to "サイトについて", about_path %>
+        </li>
+        <li>
+          <%= link_to "トップへ戻る", root_path %>
+        </li>
+        <li>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        </li>
+      <% elsif user_signed_in? %>
       <ul>
         <li>
           <%= link_to "サイトについて", about_path %>
