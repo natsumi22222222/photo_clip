@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     get 'other' => 'genres#other'
 
     resources :posts do
-      resources :comments, only: [:create,:destroy]
+      resources :comments, only: [:create,:edit, :update, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
     get 'search' => 'posts#search'

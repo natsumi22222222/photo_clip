@@ -27,6 +27,7 @@
   <div class="row text-center mt-5">
     <div class= "col-12">
       <%= form_with model: [@post,@comment] do |f| %>
+        <%= render 'public/shared/error_messages', model: f.object %>
         <%= f.text_area :comment, rows: '5', placeholder: "コメントを入力", class: "form-control" %>
         <%= f.submit "コメントする", class: "btn btn btn-outline-success mt-5" %>
       <% end %>
@@ -37,14 +38,51 @@
     <div class="col-12 show-border"></div>
       <p>コメント件数(全<%= @post.comments.count %>件)</p>
   </div>
+
   <div class= "row mt-5">
-    <div class= "col-12 show-wrap">
+  <div class="row">
+    <div class="col-12">
+      <p>
+      <% if @post.favorited_by?(current_user) %>
+      <p>
+          <%= link_to post_favorites_path(@post), method: :delete do %>
+          ♥<%= @post.favorites.count %> いいね
+          <% end %>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to post_favorites_path(@post), method: :post do %>
+          ♡<%= @post.favorites.count %> いいね
+        <% end %>
+      </p>
+      <% end %>
+      </p>
+    </div>
+  </div>
+
+    <table class= "table">
+      <tbody>
       <% @post.comments.each do |comment| %>
-        <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-        <% if comment.user == current_user %>
-          <%= link_to "削除", post_comment_path(comment.post,comment), method: :delete %>
+        <tr>
+          <th>
+            <%= image_tag @post.user.get_profile_image(100,100) %>
+          </th>
+          <td>
+            <%= @post.user.name %>
+          </td>
+          <td>
+            <%= comment.created_at.strftime('%Y/%m/%d') %>
+          </td>
+          <td>
+            <%= comment.comment %>
+          </td>
+        <% if @comment.user == current_user %>
+          <td><%= link_to '編集', edit_post_comment_path(@comment.id), class: "btn btn-sm btn-success" %></td>
+          <td><%= link_to "削除", post_comment_path(comment.post,comment), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-sm btn-danger" %></td>
         <% end %>
       <% end %>
-    </div>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

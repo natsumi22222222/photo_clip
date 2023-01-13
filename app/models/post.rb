@@ -6,12 +6,12 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags,through: :post_tags
   has_one_attached :image
-  
+
   geocoded_by :address
   after_validation :geocode
 
   validates :title, presence: true
-  validates :body, presence: true , length: {maximum: 200}
+  validates :body, presence: true , length: {maximum: 50}
   validates :image, presence: true
 
   def get_image

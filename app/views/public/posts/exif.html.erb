@@ -60,37 +60,36 @@
 
 <script>
 $(document).ready(function(){
-    let img = document.getElementById("image");
-    EXIF.getData(img, function() {
-        let exif = EXIF.getAllTags(this);
+  let img = document.getElementById("image");
+  EXIF.getData(img, function() {
+      let exif = EXIF.getAllTags(this);
 
-        // console.log(exif);
+      // console.log(exif);
 
-        $('#maker').text(exif.Make);
-        $('#model').text(exif.Model);
-        $('#lens').text(exif.LensMake);
-        $('#datetime').text(exif.DateTimeOriginal);
-        $('#width').text(exif.PixelXDimension)
-        $('#height').text(exif.PixelYDimension)
+      $('#maker').text(exif.Make);
+      $('#model').text(exif.Model);
+      $('#lens').text(exif.LensMake);
+      $('#datetime').text(exif.DateTimeOriginal);
+      $('#width').text(exif.PixelXDimension)
+      $('#height').text(exif.PixelYDimension)
 
-        switch (exif.FocalPlaneResolutionUnit) {
-          case 2:
-            $('#unit').text('インチ')
-            break;
-          case 3:
-            $('#unit').text('センチメートル')
-            break;
-          default:
-            $('#unit').text('判定不能')
-        }
+      switch (exif.FocalPlaneResolutionUnit) {
+        case 2:
+          $('#unit').text('インチ')
+          break;
+        case 3:
+          $('#unit').text('センチメートル')
+          break;
+        default:
+          $('#unit').text('判定不能')
+      }
 
-        $('#iso').text(exif.ISOSpeedRatings)
-        $('#focal_length').text(exif.FocalLength)
-        $('#exposure_time').text(exif.ExposureTime)
-        $('#shutter_speed_value').text(exif.ShutterSpeedValue)
-        $('#aperture_value').text(exif.ApertureValue)
-        $('#software').text(exif.Software)
-
+      $('#iso').text(exif.ISOSpeedRatings)
+      $('#focal_length').text(exif.FocalLength)
+      $('#exposure_time').text(exif.ExposureTime)
+      $('#shutter_speed_value').text(exif.ShutterSpeedValue)
+      $('#aperture_value').text(exif.ApertureValue)
+      $('#software').text(exif.Software)
     });
 });
 </script>
