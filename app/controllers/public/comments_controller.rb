@@ -14,7 +14,6 @@ class Public::CommentsController < ApplicationController
     redirect_to request.referer
   end
 
-
   private
 
   def comment_params

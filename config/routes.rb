@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  devise_for :users,skip: [:passwords], controllers: {
+  devise_for :users, skip: [:passwords], controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions'
   }
@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     get 'other' => 'genres#other'
 
     resources :posts do
-      resources :comments, only: [:create,:edit, :update, :destroy]
+      resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create, :destroy]
     end
     get 'search' => 'posts#search'

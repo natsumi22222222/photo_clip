@@ -43,18 +43,12 @@ class Public::PostsController < ApplicationController
         end
       end
     end
-    # if params[:tag_ids].present?
-    #   @results= Post.none
-    #   params[:tag_ids].each do |key, value|
-    #     @posts += Tag.find_by(name: key).posts if value == "1"
-    #   end
-    # @post.distinct!
-    # end
   end
 
   def show
     @post= Post.find(params[:id])
     @comment= Comment.new
+    @comments = @post.comments
     if params[:tag_ids]
       @posts= []
       params[tag_ids].each do |key, value|
@@ -71,7 +65,6 @@ class Public::PostsController < ApplicationController
       end
     end
   end
-
 
   def exif
     @post= Post.find(params[:id])

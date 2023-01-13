@@ -76,12 +76,11 @@
           <td>
             <%= comment.comment %>
           </td>
-        <% if @comment.user == current_user %>
-          <td><%= link_to '編集', edit_post_comment_path(@comment.id), class: "btn btn-sm btn-success" %></td>
-          <td><%= link_to "削除", post_comment_path(comment.post,comment), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-sm btn-danger" %></td>
+        <% if comment.user == current_user %>
+          <td><%= link_to "削除", post_comment_path(comment.post,comment), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-sm btn-outline-danger" %></td>
         <% end %>
-      <% end %>
         </tr>
+      <% end %>
       </tbody>
     </table>
   </div>
