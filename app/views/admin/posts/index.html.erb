@@ -16,7 +16,7 @@
           <% @posts.each do |post| %>
             <tr>
               <td>
-                <%= image_tag post.get_image %>
+                <%= image_tag post.get_image, size: "100x100" %>
               </td>
               <td>
                  <%= post.user.name %>
@@ -34,6 +34,11 @@
           <% end %>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <%= paginate @posts_page %>
     </div>
   </div>
 </div>

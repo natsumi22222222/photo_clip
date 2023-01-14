@@ -12,9 +12,10 @@ class Public::GenresController < ApplicationController
     @genre.update
   end
 
+
   def nature
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -22,7 +23,7 @@ class Public::GenresController < ApplicationController
 
   def sky
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -30,7 +31,7 @@ class Public::GenresController < ApplicationController
 
   def night_view
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -38,7 +39,7 @@ class Public::GenresController < ApplicationController
 
   def architecture
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -46,7 +47,7 @@ class Public::GenresController < ApplicationController
 
   def vehicle
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -54,7 +55,7 @@ class Public::GenresController < ApplicationController
 
   def sports
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -62,7 +63,7 @@ class Public::GenresController < ApplicationController
 
   def fashion
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -70,7 +71,7 @@ class Public::GenresController < ApplicationController
 
   def military
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -78,7 +79,7 @@ class Public::GenresController < ApplicationController
 
   def portrait
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -86,7 +87,7 @@ class Public::GenresController < ApplicationController
 
   def wedding
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -94,7 +95,7 @@ class Public::GenresController < ApplicationController
 
   def animal
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -102,7 +103,7 @@ class Public::GenresController < ApplicationController
 
   def meal
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -110,7 +111,7 @@ class Public::GenresController < ApplicationController
 
   def art
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -118,7 +119,7 @@ class Public::GenresController < ApplicationController
 
   def bw
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end
@@ -126,7 +127,7 @@ class Public::GenresController < ApplicationController
 
   def other
     if params[:genre_id].present?
-      @posts= Post.where(genre_id: params[:genre_id])
+      @posts= Post.where(genre_id: params[:genre_id], release:1)
     else
       @posts= Post.all
     end

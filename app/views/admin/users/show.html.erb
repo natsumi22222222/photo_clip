@@ -1,2 +1,16 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h4><%= @user.name %>マイページ</h4>
+      <%= image_tag @user.get_profile_image(200,200) %>
+    </div>
+    <div class="col-md-8">
+      ユーザー名:
+      <%= @user.name %><br>
+      メールアドレス:
+      <%= @user.email %><br>
+      自己紹介:
+      <%= @user.introduction %><br>
+    </div>
+  </div>
+</div>

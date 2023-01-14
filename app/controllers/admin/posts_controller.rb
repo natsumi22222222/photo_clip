@@ -1,4 +1,5 @@
 class Admin::PostsController < ApplicationController
+  
   def index
    @posts= Post.all
    @posts_page= Post.all.page(params[:page]).per(10)

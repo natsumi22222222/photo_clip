@@ -42,6 +42,7 @@
     let infoWindow = []
     let markerData = [ // マーカーを立てる場所名・緯度・経度
     <% @posts.each do |post| %>
+
      {
       id: '<%= post.id %>',
       name: '<%= post.address %>',
@@ -83,6 +84,7 @@
          location.href = "https://1de328cb2cc7470aba2d89d1e334755a.vfs.cloud9.ap-northeast-1.amazonaws.com/posts/" + markerData[i]["id"]
       });
     }
+
 
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.Google_API_KEY %>&callback=initMap" async defer ></script>
