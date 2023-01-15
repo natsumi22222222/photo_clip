@@ -21,7 +21,7 @@
           <%= f.text_field :address, id: 'address', class: "mt-3", required: true %>
           <input type= "button" id= "button" class= "btn btn-outline-primary" value="地図を検索" onclick=""><br>
 
-          <%= f.label "タグ登録", class: "mt-5" %>
+          <%= f.label "タグ登録(,で区切って下さい)", class: "mt-5" %>
           <%= f.text_field :name, placeholder: ",で区切ってください", class: "mb-3" %><br>
           <%= f.radio_button :release, '1', checked: "checked" %>
           <%= f.label :release, '公開', value: 1 %>
