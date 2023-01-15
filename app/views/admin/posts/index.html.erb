@@ -16,7 +16,9 @@
           <% @posts.each do |post| %>
             <tr>
               <td>
-                <%= image_tag post.get_image, size: "100x100" %>
+                <%= link_to admin_post_path(post.id) do %>
+                  <%= image_tag post.get_image, size: "100x100" %>
+                <% end %>
               </td>
               <td>
                  <%= post.user.name %>

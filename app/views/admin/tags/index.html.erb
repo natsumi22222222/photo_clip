@@ -1,0 +1,51 @@
+ <div class="container text-center">
+  <h3>タグ管理</h3>
+  <div class="row">
+    <div class="col-12">
+      <%= form_with model: @tag, url: admin_tags_path, local: true do |f| %>
+      <table class= "mt-3 mb-3">
+        <tr>
+          <th>登録するタグ</th>
+          <td><%= f.text_field :tag, class: "ml-3" %></td>
+          <td><%= f.submit 'タグ登録', class: "btn btn-sm btn-success ml-3" %></td>
+        </tr>
+      </table>
+    <% end %>
+    </div>
+  </div>
+
+   <div class="row">
+      <div class="col-12">
+        <table class= "table">
+          <thead>
+            <tr>
+              <th>タグ</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tags.each do |tag| %>
+              <tr>
+                <td>
+                   <%= tag.name %>
+                </td>
+                <td>
+                  <%= link_to "編集する",edit_admin_tag_path(tag.id) %>
+                </td>
+                <td>
+                  <%= link_to "削除する",admin_tag_path(tag.id), method: :delete, data: {confirm: "削除しますか？"} %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <%= paginate @tags_page %>
+      </div>
+    </div>
+ </div>

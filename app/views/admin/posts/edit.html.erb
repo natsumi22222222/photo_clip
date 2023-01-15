@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <h2 class= "mb-5">管理者投稿編集</h2>
-      <%= form_with model: @post, url: edit_admin_post_path(@post.id), method: :patch do |f| %>
+      <%= form_with model: @post, url: admin_post_path(@post.id), method: :patch do |f| %>
         <%= f.file_field :image, placeholder: "投稿画像", accept: "image/*"  %><br>
         <%= f.label :title, "タイトル" %>
         <%= f.text_field :title %><br>

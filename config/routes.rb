@@ -16,11 +16,11 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    resources :tags, only: [:index, :edit, :update]
+    resources :tags, only: [:create, :index, :edit, :update, :destroy]
     resources :users, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :comments, only: [:index,:show, :destroy]
-    resources :posts, only: [:index, :show, :edit, :destroy]
+    resources :posts, only: [:index, :show, :edit,:update, :destroy]
 
   end
 

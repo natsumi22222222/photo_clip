@@ -1,7 +1,11 @@
 <div class="container">
+  <div class="row text-center">
+    <div class="col-12 mt-3 mb-5">
+      <h4><%= @user.name %>さんの管理ページ</h4>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-4">
-      <h4><%= @user.name %>マイページ</h4>
       <%= image_tag @user.get_profile_image(200,200) %>
     </div>
     <div class="col-md-8">
