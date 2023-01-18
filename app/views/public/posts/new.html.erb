@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center">
-      <img src= '/assets/marker.jpeg' alt= "" class= "marker-image">
+      <img src= <%= image_path('marker.jpg') %> alt= "" class= "marker-image">
       <h3 class= "section-ttl">写真投稿ページ</h3>
         <%= form_with model: @post, local: true, url: posts_path do |f| %>
           <%= render 'public/shared/error_messages', model: f.object %>

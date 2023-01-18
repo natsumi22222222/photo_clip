@@ -12,7 +12,7 @@
     <div class="swiper-button-next"></div>
   </div>
 
-  <img src= 'assets/marker.jpeg' alt= "" class= "marker-image">
+  <img src= <%= image_path('marker.jpg') %> alt= "" class= "marker-image">
   <div class= "row text-center mt-5">
     <div class= "col-12 ">
       <p>お気に入りの写真を探しに出かけよう</p>
@@ -81,7 +81,7 @@
     function markerEvent(i) {
         marker[i].addListener('click', function() { // マーカーをクリックしたとき
 
-         location.href = "https://1de328cb2cc7470aba2d89d1e334755a.vfs.cloud9.ap-northeast-1.amazonaws.com/posts/" + markerData[i]["id"]
+         location.href = "<%= ENV["HOST_NAME"] %>posts/" + markerData[i]["id"]
       });
     }
 
