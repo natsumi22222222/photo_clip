@@ -11,6 +11,7 @@
   </div>
   <div class="row">
     <div class="col-12">
+      <img src= <%= image_path('marker.jpg') %> alt= "" class= "marker-image">
       <% if @results.nil? %>
         <p>検索キーワードを入力して下さい。</p>
       <% elsif @results.count > 0 %>
