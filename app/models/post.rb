@@ -42,4 +42,5 @@ class Post < ApplicationRecord
     where('title LIKE ? OR body LIKE ?', "%#{keyword}%", "%#{keyword}%")
   end
 
+
 end

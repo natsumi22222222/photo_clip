@@ -45,25 +45,29 @@ class Public::PostsController < ApplicationController
     end
   end
 
+  def tag_search
+    if params[:keywords].present?
+      @keywords= params[:keywords].split(/[[:blank:]]+/)
+      @type= params[:type]
+      @results= Tag.none
+      if @type == 'AND'
+        @keywords.each_with_index do |keyword, i|
+          @results= Tag.search(keyword) if i == 0
+          @results= @results.merge(@results.search(keyword))
+        end
+      else
+        @keywords.each do |keyword|
+          @results= @results.or(Tag.search(keyword))
+        end
+      end
+    end
+  end
+
   def show
     @post= Post.find(params[:id])
     @comment= Comment.new
     @comments = @post.comments
-    if params[:tag_ids]
-      @posts= []
-      params[tag_ids].each do |key, value|
-        @posts += Tag.find_by(name: key).posts if value == "1"
-      end
-    end
-    if params[:tag_ids]
-      @posts= []
-      params[:tag_ids].each do |key, value|
-        if value == "1"
-          post_tags= Tag.find_by(name: key).posts
-          @posts= @posts.empty? ? post_tags : @posts & post_tags
-        end
-      end
-    end
+
   end
 
   def exif
