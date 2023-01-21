@@ -28,40 +28,44 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    if params[:keywords].present?
-      @keywords= params[:keywords].split(/[[:blank:]]+/)
-      @type= params[:type]
-      @results= Post.none
-      if @type == 'AND'
-        @keywords.each_with_index do |keyword, i|
-          @results= Post.search(keyword) if i == 0
-          @results= @results.merge(@results.search(keyword))
+    #byebug
+    if params[:mode] == 'POST'
+      if params[:keywords].present?
+        @keywords= params[:keywords].split(/[[:blank:]]+/)
+        @type= params[:type]
+        @results= Post.none
+        if @type == 'AND'
+          @keywords.each_with_index do |keyword, i|
+            @results= Post.search(keyword) if i == 0
+            @results= @results.merge(@results.search(keyword))
+          end
+        else
+          @keywords.each do |keyword|
+            @results= @results.or(Post.search(keyword))
+          end
         end
-      else
-        @keywords.each do |keyword|
-          @results= @results.or(Post.search(keyword))
+      end
+    elsif params[:mode] == 'TAG'
+      if params[:keywords].present?
+        @keywords= params[:keywords].split(/[[:blank:]]+/)
+        @type= params[:type]
+        @results= Tag.none
+        if @type == 'AND'
+          @keywords.each_with_index do |keyword, i|
+            @results= Tag.search(keyword) if i == 0
+            @results= @results.merge(@results.search(keyword))
+          end
+        else
+          @keywords.each do |keyword|
+            @results= @results.or(Tag.search(keyword))
+          end
         end
       end
     end
   end
 
-  def tag_search
-    if params[:keywords].present?
-      @keywords= params[:keywords].split(/[[:blank:]]+/)
-      @type= params[:type]
-      @results= Tag.none
-      if @type == 'AND'
-        @keywords.each_with_index do |keyword, i|
-          @results= Tag.search(keyword) if i == 0
-          @results= @results.merge(@results.search(keyword))
-        end
-      else
-        @keywords.each do |keyword|
-          @results= @results.or(Tag.search(keyword))
-        end
-      end
-    end
-  end
+
+
 
   def show
     @post= Post.find(params[:id])

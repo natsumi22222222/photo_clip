@@ -29,6 +29,7 @@ class Post < ApplicationRecord
     end
 
     tag_list.each do |tag|
+      tag = "#" + tag
       inspected_tag= Tag.where(name: tag).first_or_create
       self.tags << inspected_tag
     end

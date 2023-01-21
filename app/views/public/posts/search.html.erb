@@ -4,6 +4,7 @@
       <%= form_with url: search_path, method: :get, local: true do |f| %>
         <%= f.label :keywords, '検索ワード' %>
         <%= text_field_tag :keywords, params[:keywords] %>
+        <%= f.select('mode', options_for_select([%w[投稿記事 POST], %w[タグ TAG]], { :selected => params[:mode] })) %>
         <%= f.select('type', options_for_select([%w[AND AND], %w[OR OR]], { :selected => params[:type] })) %>
         <%= f.submit "検索", class: "btn btn-outline-primary"%>
       <% end %>
@@ -13,14 +14,22 @@
     <div class="col-12">
       <img src= <%= image_path('marker.jpg') %> alt= "" class= "marker-image">
       <% if @results.nil? %>
-        <p>検索キーワードを入力して下さい。</p>
+        <p>検索結果は0件でした。</p>
       <% elsif @results.count > 0 %>
         <%= @keywords %> 検索結果 ( <%= @type %> )
-        <% @results.each do |result| %>
-          <p>
-            <%= link_to result.title %><br>
-            <%= link_to result.body %>
-          </p>
+        <% if @results.model == Post %>
+          <% @results.each do |result| %>
+            <p>
+              <%= link_to result.title, post_path(result.id) %><br>
+              <%= link_to result.body, post_path(result.id)  %>
+            </p>
+          <% end %>
+        <% elsif @results.model == Tag %>
+          <% @results.each do |result| %>
+            <p>
+              <%= link_to result.name %><br>
+            </p>
+          <% end %>
         <% end %>
       <% elsif  @results.count == 0 %>
         <p>検索結果はありません。</p>
