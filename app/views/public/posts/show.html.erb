@@ -39,7 +39,7 @@
       <p>コメント件数(全<%= @post.comments.count %>件)</p>
   </div>
 
-  <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+  <%= render partial: 'public/favorites/favorite', locals: { post: @post } %>
 
     <table class= "table">
       <tbody>

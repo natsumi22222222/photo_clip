@@ -4,12 +4,13 @@
     <div class="col-12">
       <div class="likes_buttons">
         <% if user_signed_in? %>
-          <% if current_user.liked_by?(@post.id) %>
+          <% if current_user.favorited_by?(@post.id) %>
             <%= link_to post_favorites_path(@post.id), method: :delete, remote: true do %>
             <p class="like-button">
               <i class="fas fa-heart fa-2x" style="color: #e82a2a;"></i>
               <span style="color: #e82a2a"><%= @article.likes.count %></span>
             </p>
+            <% end %>
           <% end %>
         <% else %>
           <%= link_to post_favorites_path(@post.id), method: :post, remote: true do %>
@@ -19,27 +20,5 @@
           <% end %>
         <% end %>
       </div>
-    </div>
-  </div>
-
-
-
-
-
-      <p>
-      <% if @post.favorited_by?(current_user) %>
-      <p>
-          <%= link_to post_favorites_path(@post), method: :delete do %>
-          ♥<%= @post.favorites.count %> いいね
-          <% end %>
-      </p>
-      <% else %>
-      <p>
-        <%= link_to post_favorites_path(@post), method: :post  do %>
-          ♡<%= @post.favorites.count %> いいね
-        <% end %>
-      </p>
-      <% end %>
-      </p>
     </div>
   </div>
