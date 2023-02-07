@@ -20,7 +20,6 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts= Post.where(release:1).order(id: "DESC")
-    @posts_page= Post.all.page(params[:page]).per(15)
   end
 
   def user_post
@@ -28,7 +27,6 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    #byebug
     if params[:mode] == 'POST'
       if params[:keywords].present?
         @keywords= params[:keywords].split(/[[:blank:]]+/)
@@ -70,8 +68,6 @@ class Public::PostsController < ApplicationController
   def show
     @post= Post.find(params[:id])
     @comment= Comment.new
-    @comments = @post.comments
-
   end
 
   def exif

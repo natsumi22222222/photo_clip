@@ -65,8 +65,6 @@ $(document).ready(function(){
   EXIF.getData(img, function() {
       let exif = EXIF.getAllTags(this);
 
-      // console.log(exif);
-
       $('#maker').text(exif.Make);
       $('#model').text(exif.Model);
       $('#lens').text(exif.LensMake);
