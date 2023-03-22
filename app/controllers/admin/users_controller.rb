@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :ensure_current_user,{only:[:show, :edit, :update]}
+
 
   def index
     @users_page= User.all.page(params[:page]).per(10)
