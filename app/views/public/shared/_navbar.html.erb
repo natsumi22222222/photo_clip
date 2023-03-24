@@ -1,6 +1,7 @@
       <header class= "fixed-top">
         <nav class="navbar navbar-light navbar-height">
-      <a href="#" class="navbar-brand text-secondary ml-2"><strong>PhotoClip</strong></a>
+
+      <%= link_to "Photo Clip", root_path, class: "navbar-brand text-secondary font-weight-bold ml-2" %>
        <div id="sp-menu">
       <h4>  -   M E N U   -  </h4>
       <% if admin_signed_in? %>
